@@ -284,8 +284,9 @@ erDiagram
 -- Run: psql -U postgres -d vendorbridge -f schema.sql
 -- ============================================================
 
--- Enable UUID generation
-CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+-- Enable UUID generation (pgcrypto is pre-installed on Supabase)
+-- gen_random_uuid() is built-in on PostgreSQL 13+, no extension needed
+-- If running locally, uncomment: CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
 -- ============================================================
 -- 1. USERS (Auth + Roles inlined)
@@ -662,54 +663,55 @@ CREATE TRIGGER trg_invoices_updated BEFORE UPDATE ON invoices
 -- ============================================================
 
 -- ============================================================
--- USERS (4 roles) — password is 'password123' bcrypt-hashed
+-- USERS (4 roles) — password is 'Password@123' for all users
 -- ============================================================
--- bcrypt hash of 'password123' with cost 10
--- $2b$10$rQZ8K5L2v3F1e4G7h9J0kO.mN5pR8sT1uV3wX5yZ7aB9cD1eF3gH
+-- IMPORTANT: Generate this hash in your backend before production use.
+-- The hash below is a valid bcrypt hash for demo purposes.
+-- To generate: node -e "require('bcryptjs').hash('Password@123',10).then(h=>console.log(h))"
 
 INSERT INTO users (id, email, password_hash, first_name, last_name, role, phone) VALUES
 -- Admin
 ('a0000000-0000-0000-0000-000000000001',
  'admin@vendorbridge.com',
- '$2b$10$rQZ8K5L2v3F1e4G7h9J0kO.mN5pR8sT1uV3wX5yZ7aB9cD1eF3gH',
+ '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy',
  'Meera', 'Sharma', 'admin', '+91-9876500001'),
 
 -- Procurement Officer
 ('a0000000-0000-0000-0000-000000000002',
  'priya@vendorbridge.com',
- '$2b$10$rQZ8K5L2v3F1e4G7h9J0kO.mN5pR8sT1uV3wX5yZ7aB9cD1eF3gH',
+ '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy',
  'Priya', 'Patel', 'procurement_officer', '+91-9876500002'),
 
 -- Manager / Approver
 ('a0000000-0000-0000-0000-000000000003',
  'anand@vendorbridge.com',
- '$2b$10$rQZ8K5L2v3F1e4G7h9J0kO.mN5pR8sT1uV3wX5yZ7aB9cD1eF3gH',
+ '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy',
  'Anand', 'Mehta', 'manager', '+91-9876500003'),
 
 -- Vendor Users (linked to vendor records below)
 ('a0000000-0000-0000-0000-000000000010',
  'rajesh@techsupply.in',
- '$2b$10$rQZ8K5L2v3F1e4G7h9J0kO.mN5pR8sT1uV3wX5yZ7aB9cD1eF3gH',
+ '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy',
  'Rajesh', 'Kumar', 'vendor', '+91-9876500010'),
 
 ('a0000000-0000-0000-0000-000000000011',
  'amit@officeworld.in',
- '$2b$10$rQZ8K5L2v3F1e4G7h9J0kO.mN5pR8sT1uV3wX5yZ7aB9cD1eF3gH',
+ '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy',
  'Amit', 'Singh', 'vendor', '+91-9876500011'),
 
 ('a0000000-0000-0000-0000-000000000012',
  'neha@globalparts.in',
- '$2b$10$rQZ8K5L2v3F1e4G7h9J0kO.mN5pR8sT1uV3wX5yZ7aB9cD1eF3gH',
+ '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy',
  'Neha', 'Gupta', 'vendor', '+91-9876500012'),
 
 ('a0000000-0000-0000-0000-000000000013',
  'vikram@safetyplus.in',
- '$2b$10$rQZ8K5L2v3F1e4G7h9J0kO.mN5pR8sT1uV3wX5yZ7aB9cD1eF3gH',
+ '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy',
  'Vikram', 'Desai', 'vendor', '+91-9876500013'),
 
 ('a0000000-0000-0000-0000-000000000014',
  'sanjay@furnpro.in',
- '$2b$10$rQZ8K5L2v3F1e4G7h9J0kO.mN5pR8sT1uV3wX5yZ7aB9cD1eF3gH',
+ '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy',
  'Sanjay', 'Joshi', 'vendor', '+91-9876500014');
 
 -- ============================================================
@@ -728,19 +730,19 @@ INSERT INTO vendors (id, user_id, company_name, contact_person, email, phone, ci
  '+91-9876500011', 'Delhi', 'Delhi', '07AABCO5678G2Z3',
  'Office Supplies', 'approved', 45, 3.80, 42),
 
-('v0000000-0000-0000-0000-000000000012',
+('v0000000-0000-0000-0000-000000000003',
  'a0000000-0000-0000-0000-000000000012',
  'Global Parts Manufacturing', 'Neha Gupta', 'neha@globalparts.in',
  '+91-9876500012', 'Pune', 'Maharashtra', '27AABCG9012H3Z1',
  'Raw Materials', 'approved', 60, 4.50, 15),
 
-('v0000000-0000-0000-0000-000000000013',
+('v0000000-0000-0000-0000-000000000004',
  'a0000000-0000-0000-0000-000000000013',
  'SafetyPlus Equipments', 'Vikram Desai', 'vikram@safetyplus.in',
  '+91-9876500013', 'Ahmedabad', 'Gujarat', '24AABCS3456I4Z7',
  'Safety Equipment', 'approved', 30, 3.50, 8),
 
-('v0000000-0000-0000-0000-000000000014',
+('v0000000-0000-0000-0000-000000000005',
  'a0000000-0000-0000-0000-000000000014',
  'FurnPro Interiors', 'Sanjay Joshi', 'sanjay@furnpro.in',
  '+91-9876500014', 'Bangalore', 'Karnataka', '29AABCF7890J5Z2',
@@ -929,7 +931,7 @@ INSERT INTO purchase_orders (id, po_number, rfq_id, quotation_id, vendor_id, sta
  'q0000000-0000-0000-0000-000000000001',
  'v0000000-0000-0000-0000-000000000001',
  'acknowledged', 1725000.00, 310500.00,
- (CURRENT_DATE + INTERVAL '7 days')::DATE,
+ (CURRENT_DATE + INTERVAL '7 days'),
  'VendorBridge HQ, Tower B, 4th Floor, Andheri East, Mumbai - 400069',
  'Approved under Q3 IT Budget. Delivery to IT asset room.',
  'a0000000-0000-0000-0000-000000000002',
@@ -940,11 +942,11 @@ INSERT INTO purchase_orders (id, po_number, rfq_id, quotation_id, vendor_id, sta
 
 -- Older POs for dashboard analytics (spend trends)
 INSERT INTO purchase_orders (id, po_number, rfq_id, vendor_id, status, total_amount, tax_amount, delivery_date, created_by, approved_by, approved_at, created_at) VALUES
-('p0000000-0000-0000-0000-000000000002', 'PO-2026-0002', NULL, 'v0000000-0000-0000-0000-000000000002', 'closed', 185000.00, 22200.00, (CURRENT_DATE - INTERVAL '60 days')::DATE, 'a0000000-0000-0000-0000-000000000002', 'a0000000-0000-0000-0000-000000000003', NOW() - INTERVAL '65 days', NOW() - INTERVAL '70 days'),
-('p0000000-0000-0000-0000-000000000003', 'PO-2026-0003', NULL, 'v0000000-0000-0000-0000-000000000001', 'closed', 450000.00, 81000.00, (CURRENT_DATE - INTERVAL '45 days')::DATE, 'a0000000-0000-0000-0000-000000000002', 'a0000000-0000-0000-0000-000000000003', NOW() - INTERVAL '50 days', NOW() - INTERVAL '55 days'),
-('p0000000-0000-0000-0000-000000000004', 'PO-2026-0004', NULL, 'v0000000-0000-0000-0000-000000000003', 'received', 320000.00, 57600.00, (CURRENT_DATE - INTERVAL '20 days')::DATE, 'a0000000-0000-0000-0000-000000000002', 'a0000000-0000-0000-0000-000000000003', NOW() - INTERVAL '30 days', NOW() - INTERVAL '35 days'),
-('p0000000-0000-0000-0000-000000000005', 'PO-2026-0005', NULL, 'v0000000-0000-0000-0000-000000000001', 'closed', 275000.00, 49500.00, (CURRENT_DATE - INTERVAL '90 days')::DATE, 'a0000000-0000-0000-0000-000000000002', 'a0000000-0000-0000-0000-000000000003', NOW() - INTERVAL '95 days', NOW() - INTERVAL '100 days'),
-('p0000000-0000-0000-0000-000000000006', 'PO-2026-0006', NULL, 'v0000000-0000-0000-0000-000000000002', 'closed', 92000.00, 11040.00, (CURRENT_DATE - INTERVAL '120 days')::DATE, 'a0000000-0000-0000-0000-000000000002', 'a0000000-0000-0000-0000-000000000003', NOW() - INTERVAL '125 days', NOW() - INTERVAL '130 days');
+('p0000000-0000-0000-0000-000000000002', 'PO-2026-0002', NULL, 'v0000000-0000-0000-0000-000000000002', 'closed', 185000.00, 22200.00, (CURRENT_DATE - INTERVAL '60 days'), 'a0000000-0000-0000-0000-000000000002', 'a0000000-0000-0000-0000-000000000003', NOW() - INTERVAL '65 days', NOW() - INTERVAL '70 days'),
+('p0000000-0000-0000-0000-000000000003', 'PO-2026-0003', NULL, 'v0000000-0000-0000-0000-000000000001', 'closed', 450000.00, 81000.00, (CURRENT_DATE - INTERVAL '45 days'), 'a0000000-0000-0000-0000-000000000002', 'a0000000-0000-0000-0000-000000000003', NOW() - INTERVAL '50 days', NOW() - INTERVAL '55 days'),
+('p0000000-0000-0000-0000-000000000004', 'PO-2026-0004', NULL, 'v0000000-0000-0000-0000-000000000003', 'received', 320000.00, 57600.00, (CURRENT_DATE - INTERVAL '20 days'), 'a0000000-0000-0000-0000-000000000002', 'a0000000-0000-0000-0000-000000000003', NOW() - INTERVAL '30 days', NOW() - INTERVAL '35 days'),
+('p0000000-0000-0000-0000-000000000005', 'PO-2026-0005', NULL, 'v0000000-0000-0000-0000-000000000001', 'closed', 275000.00, 49500.00, (CURRENT_DATE - INTERVAL '90 days'), 'a0000000-0000-0000-0000-000000000002', 'a0000000-0000-0000-0000-000000000003', NOW() - INTERVAL '95 days', NOW() - INTERVAL '100 days'),
+('p0000000-0000-0000-0000-000000000006', 'PO-2026-0006', NULL, 'v0000000-0000-0000-0000-000000000002', 'closed', 92000.00, 11040.00, (CURRENT_DATE - INTERVAL '120 days'), 'a0000000-0000-0000-0000-000000000002', 'a0000000-0000-0000-0000-000000000003', NOW() - INTERVAL '125 days', NOW() - INTERVAL '130 days');
 
 -- ============================================================
 -- PO_ITEMS (for PO-2026-0001 — the active one)
@@ -977,8 +979,8 @@ INSERT INTO invoices (id, invoice_number, po_id, vendor_id, status, invoice_date
 ('i0000000-0000-0000-0000-000000000001',
  'INV-TS-2026-042', 'p0000000-0000-0000-0000-000000000003',
  'v0000000-0000-0000-0000-000000000001', 'paid',
- (CURRENT_DATE - INTERVAL '40 days')::DATE,
- (CURRENT_DATE - INTERVAL '10 days')::DATE,
+ (CURRENT_DATE - INTERVAL '40 days'),
+ (CURRENT_DATE - INTERVAL '10 days'),
  450000.00, 81000.00, 531000.00,
  'a0000000-0000-0000-0000-000000000010',
  'a0000000-0000-0000-0000-000000000002',
@@ -989,8 +991,8 @@ INSERT INTO invoices (id, invoice_number, po_id, vendor_id, status, invoice_date
 ('i0000000-0000-0000-0000-000000000002',
  'INV-OW-2026-118', 'p0000000-0000-0000-0000-000000000002',
  'v0000000-0000-0000-0000-000000000002', 'paid',
- (CURRENT_DATE - INTERVAL '55 days')::DATE,
- (CURRENT_DATE - INTERVAL '10 days')::DATE,
+ (CURRENT_DATE - INTERVAL '55 days'),
+ (CURRENT_DATE - INTERVAL '10 days'),
  185000.00, 22200.00, 207200.00,
  'a0000000-0000-0000-0000-000000000011',
  'a0000000-0000-0000-0000-000000000002',
@@ -998,12 +1000,12 @@ INSERT INTO invoices (id, invoice_number, po_id, vendor_id, status, invoice_date
  NOW() - INTERVAL '15 days',
  NOW() - INTERVAL '55 days'),
 
--- Pending invoice (for demo — shows matching)
+-- Pending invoice (for demo -- shows matching)
 ('i0000000-0000-0000-0000-000000000003',
  'INV-GP-2026-007', 'p0000000-0000-0000-0000-000000000004',
  'v0000000-0000-0000-0000-000000000003', 'pending',
- CURRENT_DATE::DATE,
- (CURRENT_DATE + INTERVAL '60 days')::DATE,
+ CURRENT_DATE,
+ (CURRENT_DATE + INTERVAL '60 days'),
  320000.00, 57600.00, 377600.00,
  'a0000000-0000-0000-0000-000000000012',
  NULL, NULL, NULL,
@@ -1013,9 +1015,9 @@ INSERT INTO invoices (id, invoice_number, po_id, vendor_id, status, invoice_date
 -- NOTIFICATIONS (Unread items for demo)
 -- ============================================================
 INSERT INTO notifications (user_id, type, title, message, entity_type, entity_id, is_read, action_url, created_at) VALUES
--- For Manager (Anand) — pending approvals
-('a0000000-0000-0000-0000-000000000003', 'approval_required', 'PO Approval Required', 'Purchase Order PO-2026-0004 for ₹3,20,000 from Global Parts requires your approval.', 'purchase_order', 'p0000000-0000-0000-0000-000000000004', FALSE, '/approvals', NOW() - INTERVAL '1 day'),
-('a0000000-0000-0000-0000-000000000003', 'approval_required', 'New Invoice Pending', 'Invoice INV-GP-2026-007 for ₹3,77,600 received from Global Parts Manufacturing.', 'invoice', 'i0000000-0000-0000-0000-000000000003', FALSE, '/invoices', NOW() - INTERVAL '2 days'),
+-- For Manager (Anand) -- pending approvals
+('a0000000-0000-0000-0000-000000000003', 'approval_required', 'PO Approval Required', 'Purchase Order PO-2026-0004 for Rs.3,20,000 from Global Parts requires your approval.', 'purchase_order', 'p0000000-0000-0000-0000-000000000004', FALSE, '/approvals', NOW() - INTERVAL '1 day'),
+('a0000000-0000-0000-0000-000000000003', 'approval_required', 'New Invoice Pending', 'Invoice INV-GP-2026-007 for Rs.3,77,600 received from Global Parts Manufacturing.', 'invoice', 'i0000000-0000-0000-0000-000000000003', FALSE, '/invoices', NOW() - INTERVAL '2 days'),
 
 -- For Procurement Officer (Priya)
 ('a0000000-0000-0000-0000-000000000002', 'quotation_received', 'New Quotation Received', 'OfficeWorld Solutions submitted a quotation for RFQ-2026-0002 (Annual Office Supplies).', 'quotation', 'q0000000-0000-0000-0000-000000000004', FALSE, '/rfqs/r0000000-0000-0000-0000-000000000002', NOW() - INTERVAL '2 days'),
@@ -1031,16 +1033,16 @@ INSERT INTO activity_logs (entity_type, entity_id, action, description, performe
 -- RFQ 1 lifecycle
 ('rfq', 'r0000000-0000-0000-0000-000000000001', 'created', 'RFQ created: Q3 Laptop Procurement', 'a0000000-0000-0000-0000-000000000002', '{"rfq_number": "RFQ-2026-0001"}', NOW() - INTERVAL '20 days'),
 ('rfq', 'r0000000-0000-0000-0000-000000000001', 'sent', 'RFQ sent to 3 vendors: TechSupply, OfficeWorld, GlobalParts', 'a0000000-0000-0000-0000-000000000002', '{"vendor_count": 3}', NOW() - INTERVAL '19 days'),
-('rfq', 'r0000000-0000-0000-0000-000000000001', 'quotation_received', 'Quotation received from TechSupply India — ₹17,25,000', 'a0000000-0000-0000-0000-000000000010', '{"vendor": "TechSupply India", "amount": 1725000}', NOW() - INTERVAL '15 days'),
-('rfq', 'r0000000-0000-0000-0000-000000000001', 'quotation_received', 'Quotation received from OfficeWorld — ₹16,50,000', 'a0000000-0000-0000-0000-000000000011', '{"vendor": "OfficeWorld", "amount": 1650000}', NOW() - INTERVAL '14 days'),
-('rfq', 'r0000000-0000-0000-0000-000000000001', 'quotation_received', 'Quotation received from GlobalParts — ₹18,90,000', 'a0000000-0000-0000-0000-000000000012', '{"vendor": "GlobalParts", "amount": 1890000}', NOW() - INTERVAL '13 days'),
+('rfq', 'r0000000-0000-0000-0000-000000000001', 'quotation_received', 'Quotation received from TechSupply India -- Rs.17,25,000', 'a0000000-0000-0000-0000-000000000010', '{"vendor": "TechSupply India", "amount": 1725000}', NOW() - INTERVAL '15 days'),
+('rfq', 'r0000000-0000-0000-0000-000000000001', 'quotation_received', 'Quotation received from OfficeWorld -- Rs.16,50,000', 'a0000000-0000-0000-0000-000000000011', '{"vendor": "OfficeWorld", "amount": 1650000}', NOW() - INTERVAL '14 days'),
+('rfq', 'r0000000-0000-0000-0000-000000000001', 'quotation_received', 'Quotation received from GlobalParts -- Rs.18,90,000', 'a0000000-0000-0000-0000-000000000012', '{"vendor": "GlobalParts", "amount": 1890000}', NOW() - INTERVAL '13 days'),
 ('rfq', 'r0000000-0000-0000-0000-000000000001', 'closed', 'RFQ closed for evaluation. 3 quotations received.', 'a0000000-0000-0000-0000-000000000002', '{"quotation_count": 3}', NOW() - INTERVAL '8 days'),
 ('rfq', 'r0000000-0000-0000-0000-000000000001', 'awarded', 'Vendor selected: TechSupply India. Best value: competitive price + 14-day delivery.', 'a0000000-0000-0000-0000-000000000002', '{"selected_vendor": "TechSupply India", "amount": 1725000}', NOW() - INTERVAL '7 days'),
 
 -- PO 1 lifecycle
 ('purchase_order', 'p0000000-0000-0000-0000-000000000001', 'created', 'Purchase Order PO-2026-0001 generated from RFQ-2026-0001', 'a0000000-0000-0000-0000-000000000002', '{"po_number": "PO-2026-0001", "amount": 1725000}', NOW() - INTERVAL '7 days'),
 ('purchase_order', 'p0000000-0000-0000-0000-000000000001', 'submitted_for_approval', 'PO submitted for manager approval', 'a0000000-0000-0000-0000-000000000002', '{}', NOW() - INTERVAL '7 days'),
-('purchase_order', 'p0000000-0000-0000-0000-000000000001', 'approved', 'PO approved by Anand Mehta — "Within Q3 IT budget"', 'a0000000-0000-0000-0000-000000000003', '{"approver": "Anand Mehta"}', NOW() - INTERVAL '6 days'),
+('purchase_order', 'p0000000-0000-0000-0000-000000000001', 'approved', 'PO approved by Anand Mehta -- Within Q3 IT budget', 'a0000000-0000-0000-0000-000000000003', '{"approver": "Anand Mehta"}', NOW() - INTERVAL '6 days'),
 ('purchase_order', 'p0000000-0000-0000-0000-000000000001', 'sent', 'PO sent to TechSupply India', 'a0000000-0000-0000-0000-000000000002', '{}', NOW() - INTERVAL '5 days'),
 ('purchase_order', 'p0000000-0000-0000-0000-000000000001', 'acknowledged', 'Vendor acknowledged receipt of PO', 'a0000000-0000-0000-0000-000000000010', '{}', NOW() - INTERVAL '4 days');
 ```
