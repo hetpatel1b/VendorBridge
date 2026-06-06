@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Box, ShieldCheck, Zap } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 
 export default function LandingPage() {
   return (
@@ -20,12 +20,12 @@ export default function LandingPage() {
           <Link href="#pricing" className="hover:text-foreground transition-colors">Pricing</Link>
         </div>
         <div className="flex items-center gap-4">
-          <Button variant="ghost" className="hidden sm:flex" asChild>
-            <Link href="/login">Log in</Link>
-          </Button>
-          <Button className="rounded-full shadow-lg shadow-primary/25" asChild>
-            <Link href="/dashboard">Access Platform <ArrowRight className="w-4 h-4 ml-2" /></Link>
-          </Button>
+          <Link href="/login" className={buttonVariants({ variant: "ghost", className: "hidden sm:flex" })}>
+            Log in
+          </Link>
+          <Link href="/dashboard" className={buttonVariants({ className: "rounded-full shadow-lg shadow-primary/25" })}>
+            Access Platform <ArrowRight className="w-4 h-4 ml-2" />
+          </Link>
         </div>
       </nav>
 
@@ -44,11 +44,9 @@ export default function LandingPage() {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center">
-          <Button size="lg" className="h-14 px-8 text-lg rounded-full shadow-xl shadow-primary/20" asChild>
-            <Link href="/dashboard">
-              Enter Command Center <ArrowRight className="w-5 h-5 ml-2" />
-            </Link>
-          </Button>
+          <Link href="/dashboard" className={buttonVariants({ size: "lg", className: "h-14 px-8 text-lg rounded-full shadow-xl shadow-primary/20" })}>
+            Enter Command Center <ArrowRight className="w-5 h-5 ml-2" />
+          </Link>
           <Button size="lg" variant="outline" className="h-14 px-8 text-lg rounded-full glass-card">
             Book a Demo
           </Button>

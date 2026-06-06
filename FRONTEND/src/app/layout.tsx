@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/sonner";
 import { CommandPalette } from "@/components/CommandPalette";
+import { AuthProvider } from "@/components/auth/AuthProvider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -32,9 +33,11 @@ export default function RootLayout({
     >
       <body className="min-h-screen bg-background font-sans text-foreground">
         <TooltipProvider>
-          {children}
-          <CommandPalette />
-          <Toaster position="bottom-right" />
+          <AuthProvider>
+            {children}
+            <CommandPalette />
+            <Toaster position="bottom-right" />
+          </AuthProvider>
         </TooltipProvider>
       </body>
     </html>

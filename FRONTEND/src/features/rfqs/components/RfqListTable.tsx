@@ -28,13 +28,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const mockRfqs = [
-  { id: "RFQ-1042", title: "MacBook Pro Fleet Upgrade", department: "Engineering", status: "Evaluation", deadline: new Date(Date.now() + 86400000 * 2), budget: 150000, quotes: 3 },
-  { id: "RFQ-1043", title: "AWS Cloud Infrastructure 2026", department: "DevOps", status: "Open", deadline: new Date(Date.now() + 86400000 * 5), budget: 500000, quotes: 1 },
-  { id: "RFQ-1044", title: "Office Furniture - NY HQ", department: "Operations", status: "Awarded", deadline: new Date(Date.now() - 86400000 * 3), budget: 45000, quotes: 5 },
-  { id: "RFQ-1045", title: "Cybersecurity Audit Services", department: "Security", status: "Draft", deadline: new Date(Date.now() + 86400000 * 14), budget: 80000, quotes: 0 },
-  { id: "RFQ-1046", title: "Marketing Automation SaaS", department: "Marketing", status: "Closed", deadline: new Date(Date.now() - 86400000 * 1), budget: 120000, quotes: 4 },
-];
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabaseClient";
 
 const statusConfig = {
   Draft: { color: "bg-muted text-muted-foreground", icon: FileText },
@@ -45,6 +40,31 @@ const statusConfig = {
 };
 
 export function RfqListTable() {
+  const [rfqs, setRfqs] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchRfqs() {
+      try {
+        const { data, error } = await supabase.from("rfqs").select("*");
+        if (error) {
+          console.error("Error fetching rfqs:", error.message);
+        } else if (data) {
+          setRfqs(data);
+        }
+      } catch (err) {
+        console.error("Failed to fetch rfqs:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchRfqs();
+  }, []);
+
+  if (loading) {
+    return <div className="p-8 text-center text-muted-foreground">Loading RFQs...</div>;
+  }
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
@@ -72,7 +92,7 @@ export function RfqListTable() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {mockRfqs.map((rfq, i) => {
+            {rfqs.map((rfq, i) => {
               const StatusIcon = statusConfig[rfq.status as keyof typeof statusConfig].icon;
               return (
                 <TableRow 

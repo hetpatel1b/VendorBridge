@@ -19,16 +19,39 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabaseClient";
+
 // Stages of a PO
 const STAGES = ["Sent", "Acknowledged", "Shipped", "Delivered", "Invoiced"];
 
-const mockPos = [
-  { id: "PO-2026-001", vendor: "Apex Systems Inc.", amount: 39500, date: new Date(Date.now() - 86400000 * 2), currentStage: 3, items: 2 },
-  { id: "PO-2026-002", vendor: "Global Hardware Co.", amount: 15200, date: new Date(Date.now() - 86400000 * 5), currentStage: 1, items: 5 },
-  { id: "PO-2026-003", vendor: "TechNova Solutions", amount: 89000, date: new Date(Date.now() - 86400000 * 12), currentStage: 5, items: 1 },
-];
-
 export function PoList() {
+  const [pos, setPos] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchPos() {
+      try {
+        const { data, error } = await supabase.from("purchase_orders").select("*");
+        if (error) {
+          console.error("Error fetching purchase orders:", error.message);
+        } else if (data) {
+          setPos(data);
+        }
+      } catch (err) {
+        console.error("Failed to fetch purchase orders:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchPos();
+  }, []);
+
+  if (loading) {
+    return <div className="p-8 text-center text-muted-foreground">Loading Purchase Orders...</div>;
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between mb-4">
@@ -37,7 +60,7 @@ export function PoList() {
       </div>
 
       <div className="space-y-4">
-        {mockPos.map((po, index) => (
+        {pos.map((po, index) => (
           <motion.div
             key={po.id}
             initial={{ opacity: 0, y: 20 }}

@@ -11,30 +11,30 @@ import { supabase } from "@/lib/supabaseClient";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-export default function LoginPage() {
+export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
       });
 
       if (error) {
         toast.error(error.message);
-      } else if (data.session) {
-        toast.success("Successfully logged in");
+      } else {
+        toast.success("Successfully signed up! Please check your email if confirmation is required.");
         router.push("/dashboard");
       }
     } catch (err: any) {
-      toast.error(err.message || "An error occurred during login.");
+      toast.error(err.message || "An error occurred during sign up.");
     } finally {
       setLoading(false);
     }
@@ -54,12 +54,12 @@ export default function LoginPage() {
           transition={{ duration: 0.5 }}
           className="max-w-sm w-full mx-auto"
         >
-          <h1 className="text-3xl font-semibold tracking-tight mb-2">Welcome back</h1>
+          <h1 className="text-3xl font-semibold tracking-tight mb-2">Create an account</h1>
           <p className="text-muted-foreground mb-8 text-sm">
-            Log in to your command center to continue.
+            Join VendorBridge and streamline your procurement.
           </p>
 
-          <form className="space-y-4" onSubmit={handleLogin}>
+          <form className="space-y-4" onSubmit={handleSignup}>
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input 
@@ -73,10 +73,7 @@ export default function LoginPage() {
               />
             </div>
             <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <Label htmlFor="password">Password</Label>
-                <Link href="#" className="text-xs text-primary hover:underline">Forgot password?</Link>
-              </div>
+              <Label htmlFor="password">Password</Label>
               <Input 
                 id="password" 
                 type="password" 
@@ -85,19 +82,20 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                minLength={6}
               />
             </div>
             <Button className="w-full h-11 mt-6 font-medium shadow-lg shadow-primary/20" type="submit" disabled={loading}>
-              {loading ? "Signing in..." : (
-                <>Sign In <ArrowRight className="w-4 h-4 ml-2" /></>
+              {loading ? "Signing up..." : (
+                <>Sign Up <ArrowRight className="w-4 h-4 ml-2" /></>
               )}
             </Button>
           </form>
 
           <p className="mt-6 text-center text-sm text-muted-foreground">
-            Don't have an account?{" "}
-            <Link href="/signup" className="text-primary hover:underline font-medium">
-              Sign up
+            Already have an account?{" "}
+            <Link href="/login" className="text-primary hover:underline font-medium">
+              Log in
             </Link>
           </p>
 

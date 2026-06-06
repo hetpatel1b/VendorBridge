@@ -1,13 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { 
   Box, LayoutDashboard, FileText, Users, CheckSquare, 
   CreditCard, PieChart, Settings, Bell, Search, LogOut
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { supabase } from "@/lib/supabaseClient";
+import { useAuth } from "@/components/auth/AuthProvider";
+import { toast } from "sonner";
 
 const navItems = [
   { name: "Command Center", href: "/dashboard", icon: LayoutDashboard },
@@ -20,6 +23,18 @@ const navItems = [
 
 export function Sidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const { user, role } = useAuth();
+
+  const handleLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+      toast.success("Successfully logged out");
+      router.push("/login");
+    } catch (error: any) {
+      toast.error(error.message || "Failed to log out");
+    }
+  };
 
   return (
     <div className="w-64 h-screen border-r border-border/50 bg-background/50 backdrop-blur-xl flex flex-col fixed left-0 top-0 z-40 hidden lg:flex">
@@ -64,16 +79,19 @@ export function Sidebar() {
       </div>
 
       <div className="p-4 border-t border-border/50">
-        <div className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-muted/50 transition-colors cursor-pointer group">
+        <div 
+          onClick={handleLogout}
+          className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-muted/50 transition-colors cursor-pointer group"
+        >
           <Avatar className="w-8 h-8 border border-border">
-            <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback>AL</AvatarFallback>
+            <AvatarImage src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${user?.email}`} />
+            <AvatarFallback>{user?.email?.charAt(0).toUpperCase() || "U"}</AvatarFallback>
           </Avatar>
-          <div className="flex flex-col">
-            <span className="text-sm font-medium leading-none">Alex Chief</span>
-            <span className="text-xs text-muted-foreground mt-1">CPO</span>
+          <div className="flex flex-col overflow-hidden">
+            <span className="text-sm font-medium leading-none truncate">{user?.email || "User"}</span>
+            <span className="text-xs text-muted-foreground mt-1 uppercase">{role || "User"}</span>
           </div>
-          <LogOut className="w-4 h-4 ml-auto text-muted-foreground group-hover:text-foreground" />
+          <LogOut className="w-4 h-4 ml-auto flex-shrink-0 text-muted-foreground group-hover:text-foreground" />
         </div>
       </div>
     </div>

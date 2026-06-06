@@ -1,7 +1,7 @@
 import { AnimatedKpiCard } from "@/features/dashboard/components/AnimatedKpiCard";
 import { ActivityFeedList } from "@/features/dashboard/components/ActivityFeedList";
 import { Sparkles, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 
 export default function DashboardPage() {
@@ -14,11 +14,9 @@ export default function DashboardPage() {
         </div>
         <div className="flex items-center gap-3">
           <Button variant="outline" className="glass-card">Export Report</Button>
-          <Button asChild>
-            <Link href="/rfqs/1042/compare">
-              Review Quotes <ArrowRight className="w-4 h-4 ml-2" />
-            </Link>
-          </Button>
+          <Link href="/rfqs/1042/compare" className={buttonVariants()}>
+            Review Quotes <ArrowRight className="w-4 h-4 ml-2" />
+          </Link>
         </div>
       </header>
 
@@ -41,9 +39,9 @@ export default function DashboardPage() {
               <h2 className="text-2xl font-semibold mb-4 leading-tight">
                 "Vendor A is 12% cheaper on the laptop fleet, but Vendor B has a flawless delivery record. Recommend selecting Vendor B to mitigate risk on this critical timeline."
               </h2>
-              <Button variant="secondary" className="bg-primary/20 hover:bg-primary/30 text-primary border-none" asChild>
-                 <Link href="/rfqs/1042/compare">View Detailed Comparison</Link>
-              </Button>
+              <Link href="/rfqs/1042/compare" className={buttonVariants({ variant: "secondary", className: "bg-primary/20 hover:bg-primary/30 text-primary border-none" })}>
+                 View Detailed Comparison
+              </Link>
             </div>
           </div>
           

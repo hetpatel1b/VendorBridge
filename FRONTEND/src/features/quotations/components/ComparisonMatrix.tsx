@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, AlertCircle, ShieldCheck, Zap, SlidersHorizontal } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
+import { supabase } from "@/lib/supabaseClient";
 
 interface VendorData {
   id: string;
@@ -16,24 +17,46 @@ interface VendorData {
   deliveryDays: number;
   riskLevel: "Low" | "Medium" | "High";
   compliance: string[];
+  calculatedScore?: number;
 }
 
-const mockVendors: VendorData[] = [
-  { id: "v1", name: "TechNova Solutions", baseScore: 92, price: 42000, deliveryDays: 14, riskLevel: "Medium", compliance: ["ISO 9001"] },
-  { id: "v2", name: "Apex Systems Inc.", baseScore: 98, price: 39500, deliveryDays: 7, riskLevel: "Low", compliance: ["ISO 9001", "SOC2", "GDPR"] },
-  { id: "v3", name: "Global Hardware Co.", baseScore: 85, price: 40000, deliveryDays: 21, riskLevel: "High", compliance: ["ISO 9001"] },
-  { id: "v4", name: "Nexus Procurement", baseScore: 88, price: 37000, deliveryDays: 30, riskLevel: "Low", compliance: ["SOC2"] },
-];
-
 export function ComparisonMatrix() {
+  const [vendorsData, setVendorsData] = useState<VendorData[]>([]);
+  const [loading, setLoading] = useState(true);
   const [weights, setWeights] = useState({ price: 50, speed: 30, risk: 20 });
 
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        // Fetch vendors to compare
+        const { data, error } = await supabase.from("vendors").select("*");
+        if (data) {
+          const mapped = data.map((v: any) => ({
+            id: v.id || v.name,
+            name: v.name,
+            baseScore: v.score || 85,
+            price: v.price || Math.floor(Math.random() * 20000) + 30000, // Fallback if no quotation relation yet
+            deliveryDays: v.delivery_days || Math.floor(Math.random() * 14) + 7,
+            riskLevel: v.risk || "Medium",
+            compliance: v.certs || []
+          }));
+          setVendorsData(mapped);
+        }
+      } catch (err) {
+        console.error("Failed to fetch matrix data:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
+  }, []);
+
   // Normalize prices and speeds for scoring calculation
-  const maxPrice = Math.max(...mockVendors.map(v => v.price));
-  const maxDays = Math.max(...mockVendors.map(v => v.deliveryDays));
+  const maxPrice = Math.max(...vendorsData.map(v => v.price), 1);
+  const maxDays = Math.max(...vendorsData.map(v => v.deliveryDays), 1);
 
   const sortedVendors = useMemo(() => {
-    return mockVendors.map(vendor => {
+    return vendorsData.map(vendor => {
       // Calculate normalized scores (100 is best)
       const priceScore = ((maxPrice - vendor.price) / maxPrice) * 100 + 50; // simple normalization
       const speedScore = ((maxDays - vendor.deliveryDays) / maxDays) * 100 + 50;
@@ -54,8 +77,8 @@ export function ComparisonMatrix() {
     }).sort((a, b) => b.calculatedScore - a.calculatedScore);
   }, [weights, maxPrice, maxDays]);
 
-  const lowestPrice = Math.min(...mockVendors.map((v) => v.price));
-  const fastestDelivery = Math.min(...mockVendors.map((v) => v.deliveryDays));
+  const lowestPrice = Math.min(...vendorsData.map((v) => v.price), Infinity);
+  const fastestDelivery = Math.min(...vendorsData.map((v) => v.deliveryDays), Infinity);
 
   return (
     <div className="space-y-8">
