@@ -96,7 +96,7 @@ export function ComparisonMatrix() {
             </div>
             <Slider 
               value={[weights.price]} 
-              onValueChange={([val]) => setWeights(w => ({ ...w, price: val }))} 
+              onValueChange={(val: any) => setWeights(w => ({ ...w, price: val[0] }))} 
               max={100} step={5} className="cursor-pointer"
             />
           </div>
@@ -107,7 +107,7 @@ export function ComparisonMatrix() {
             </div>
             <Slider 
               value={[weights.speed]} 
-              onValueChange={([val]) => setWeights(w => ({ ...w, speed: val }))} 
+              onValueChange={(val: any) => setWeights(w => ({ ...w, speed: val[0] }))} 
               max={100} step={5} className="cursor-pointer"
             />
           </div>
@@ -118,7 +118,7 @@ export function ComparisonMatrix() {
             </div>
             <Slider 
               value={[weights.risk]} 
-              onValueChange={([val]) => setWeights(w => ({ ...w, risk: val }))} 
+              onValueChange={(val: any) => setWeights(w => ({ ...w, risk: val[0] }))} 
               max={100} step={5} className="cursor-pointer"
             />
           </div>

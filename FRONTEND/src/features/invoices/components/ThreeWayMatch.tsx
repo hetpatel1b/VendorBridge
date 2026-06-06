@@ -146,7 +146,7 @@ export function ThreeWayMatch() {
             color="oklch(0.6 0.2 25)" // red
             strokeWidth={2}
             path="smooth"
-            dashness={{ animation: true, strokeLen: 10, nonStrokeLen: 5, speed: -2 }}
+            dashness={{ animation: true, strokeLen: 10, nonStrokeLen: 5 }}
             headSize={4}
             startAnchor="right"
             endAnchor="left"
@@ -157,7 +157,7 @@ export function ThreeWayMatch() {
             color="oklch(0.6 0.2 25)" // red
             strokeWidth={2}
             path="smooth"
-            dashness={{ animation: true, strokeLen: 10, nonStrokeLen: 5, speed: -2 }}
+            dashness={{ animation: true, strokeLen: 10, nonStrokeLen: 5 }}
             headSize={4}
             startAnchor="right"
             endAnchor="left"

@@ -69,43 +69,45 @@ class MockQueryBuilder {
     }
   }
 
-  async insert(data: any) {
-    try {
-      const res = await fetch('http://localhost:5000/api/v1/db', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${MockSupabaseClient.getAccessToken()}`
-        },
-        body: JSON.stringify({
-          table: this.table,
-          action: 'insert',
-          data
-        })
-      });
-      const resData = await res.json();
-      
-      const chain = {
-        select: () => ({
-          single: () => ({
-            then: (cb: any) => cb({ data: resData.data, error: resData.error })
-          }),
-          then: (cb: any) => cb({ data: resData.data, error: resData.error })
-        }),
-        then: (cb: any) => cb({ data: resData.data, error: resData.error })
+  insert(data: any) {
+    const execute = async () => {
+      try {
+        const res = await fetch('http://localhost:5000/api/v1/db', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${MockSupabaseClient.getAccessToken()}`
+          },
+          body: JSON.stringify({
+            table: this.table,
+            action: 'insert',
+            data
+          })
+        });
+        return await res.json();
+      } catch (err: any) {
+        return { data: null, error: { message: err.message } };
+      }
+    };
+
+    const promise = execute();
+
+    // Attach select method directly to the promise
+    (promise as any).select = () => {
+      const selectPromise = promise.then(res => ({
+        data: res.data,
+        error: res.error
+      }));
+      (selectPromise as any).single = () => {
+        return selectPromise.then(res => ({
+          data: Array.isArray(res.data) ? res.data[0] : res.data,
+          error: res.error
+        }));
       };
-      return chain;
-    } catch (err: any) {
-      return {
-        select: () => ({
-          single: () => ({
-            then: (cb: any) => cb({ data: null, error: { message: err.message } })
-          }),
-          then: (cb: any) => cb({ data: null, error: { message: err.message } })
-        }),
-        then: (cb: any) => cb({ data: null, error: { message: err.message } })
-      };
-    }
+      return selectPromise;
+    };
+
+    return promise as any;
   }
 }
 
@@ -228,18 +230,18 @@ class MockSupabaseClient {
         localStorage.removeItem('mock_supabase_session');
       }
       MockSupabaseClient.listeners.forEach(listener => listener('SIGNED_OUT', null));
-      return { error: null };
+      return { error: null as any };
     },
 
     getSession: async () => {
-      if (typeof window === 'undefined') return { data: { session: null }, error: null };
+      if (typeof window === 'undefined') return { data: { session: null }, error: null as any };
       const sessionStr = localStorage.getItem('mock_supabase_session');
-      if (!sessionStr) return { data: { session: null }, error: null };
+      if (!sessionStr) return { data: { session: null }, error: null as any };
       try {
         const session = JSON.parse(sessionStr);
-        return { data: { session }, error: null };
+        return { data: { session }, error: null as any };
       } catch {
-        return { data: { session: null }, error: null };
+        return { data: { session: null }, error: null as any };
       }
     },
 

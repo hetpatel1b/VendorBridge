@@ -97,7 +97,7 @@ export function SpendAnalytics() {
                   />
                   <Tooltip 
                     contentStyle={{ backgroundColor: 'oklch(0.18 0.01 260)', borderColor: 'oklch(1 0 0 / 0.1)', borderRadius: '8px' }}
-                    formatter={(value: number) => `$${(value / 1000).toFixed(1)}k`}
+                    formatter={(value: any) => `$${(value / 1000).toFixed(1)}k`}
                   />
                   
                   {/* Budget Ceiling */}
