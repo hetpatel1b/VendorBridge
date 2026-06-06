@@ -201,7 +201,133 @@ class MockMutationBuilder {
 }
 
 class MockSupabaseClient {
-    auth = realSupabase.auth;
+    auth = {
+        signUp: async ({ email, password }) => {
+            try {
+                const { data, error } = await realSupabase.auth.signUp({ email, password });
+                if (!error && data && data.user) {
+                    return { data, error: null };
+                }
+                console.warn("Real Supabase signup failed, trying local DB fallback. Error:", error?.message);
+            } catch (err) {
+                console.warn("Real Supabase signup failed with exception, trying local DB fallback:", err.message);
+            }
+
+            const db = readDb();
+            const existing = db.users.find(u => u.email === email);
+            if (existing) {
+                return { data: { user: null }, error: { message: 'User already exists in local DB' } };
+            }
+
+            const newUser = {
+                id: crypto.randomUUID(),
+                email,
+                password,
+                first_name: '',
+                last_name: '',
+                role: 'vendor',
+                is_active: true,
+                created_at: new Date().toISOString()
+            };
+
+            db.users.push(newUser);
+            writeDb(db);
+
+            return {
+                data: {
+                    user: {
+                        id: newUser.id,
+                        email: newUser.email
+                    }
+                },
+                error: null
+            };
+        },
+
+        signInWithPassword: async ({ email, password }) => {
+            try {
+                const { data, error } = await realSupabase.auth.signInWithPassword({ email, password });
+                if (!error && data && data.session) {
+                    const currentDb = readDb();
+                    const existingProfile = currentDb.users.find(u => u.id === data.user.id);
+                    if (!existingProfile) {
+                        currentDb.users.push({
+                            id: data.user.id,
+                            email: data.user.email,
+                            first_name: 'Supabase',
+                            last_name: 'User',
+                            role: 'vendor',
+                            is_active: true,
+                            created_at: new Date().toISOString()
+                        });
+                        writeDb(currentDb);
+                    }
+                    return { data, error: null };
+                }
+                console.warn("Real Supabase login failed, trying local DB fallback. Error:", error?.message);
+            } catch (err) {
+                console.warn("Real Supabase login failed with exception:", err.message);
+            }
+
+            const db = readDb();
+            const user = db.users.find(u => u.email === email && u.password === password);
+            if (!user) {
+                return { data: { session: null }, error: { message: 'Invalid credentials' } };
+            }
+
+            const mockToken = Buffer.from(JSON.stringify({ id: user.id, email: user.email })).toString('base64');
+
+            return {
+                data: {
+                    user: {
+                        id: user.id,
+                        email: user.email
+                    },
+                    session: {
+                        access_token: `mock_jwt_${mockToken}`
+                    }
+                },
+                error: null
+            };
+        },
+
+        getUser: async (token) => {
+            if (token && token.startsWith('mock_jwt_')) {
+                try {
+                    const base64 = token.replace('mock_jwt_', '');
+                    const userPayload = JSON.parse(Buffer.from(base64, 'base64').toString('utf8'));
+                    const db = readDb();
+                    const user = db.users.find(u => u.id === userPayload.id);
+
+                    if (!user) {
+                        return { data: { user: null }, error: { message: 'User not found in local DB' } };
+                    }
+
+                    return {
+                        data: {
+                            user: {
+                                id: user.id,
+                                email: user.email
+                            }
+                        },
+                        error: null
+                    };
+                } catch (err) {
+                    return { data: { user: null }, error: { message: 'Failed to decode mock token' } };
+                }
+            }
+
+            try {
+                const { data, error } = await realSupabase.auth.getUser(token);
+                if (!error && data && data.user) {
+                    return { data, error: null };
+                }
+                return { data: { user: null }, error };
+            } catch (err) {
+                return { data: { user: null }, error: { message: err.message } };
+            }
+        }
+    };
 
     from(table) {
         const db = readDb();
