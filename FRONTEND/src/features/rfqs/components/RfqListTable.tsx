@@ -32,11 +32,11 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 
 const statusConfig = {
-  Draft: { color: "bg-muted text-muted-foreground", icon: FileText },
-  Open: { color: "bg-blue-500/10 text-blue-500", icon: Clock },
-  Evaluation: { color: "bg-yellow-500/10 text-yellow-500", icon: AlertCircle },
-  Awarded: { color: "bg-green-500/10 text-green-500", icon: CheckCircle },
-  Closed: { color: "bg-red-500/10 text-red-500", icon: CheckCircle },
+  draft: { color: "bg-muted text-muted-foreground", icon: FileText, label: "Draft" },
+  open: { color: "bg-blue-500/10 text-blue-500", icon: Clock, label: "Open" },
+  evaluation: { color: "bg-yellow-500/10 text-yellow-500", icon: AlertCircle, label: "Evaluation" },
+  awarded: { color: "bg-green-500/10 text-green-500", icon: CheckCircle, label: "Awarded" },
+  closed: { color: "bg-red-500/10 text-red-500", icon: CheckCircle, label: "Closed" },
 };
 
 export function RfqListTable() {
@@ -50,7 +50,17 @@ export function RfqListTable() {
         if (error) {
           console.error("Error fetching rfqs:", error.message);
         } else if (data) {
-          setRfqs(data);
+          const mappedRfqs = data.map((item: any) => ({
+            id: item.rfq_number || item.id,
+            title: item.title,
+            department: item.category || "General",
+            status: (item.status || "draft").toLowerCase(),
+            budget: item.budget_estimate || 0,
+            deadline: item.submission_deadline ? new Date(item.submission_deadline) : new Date(),
+            quotes: item.quotes_count || 0,
+            rawId: item.id
+          }));
+          setRfqs(mappedRfqs);
         }
       } catch (err) {
         console.error("Failed to fetch rfqs:", err);
@@ -91,10 +101,11 @@ export function RfqListTable() {
           </TableHeader>
           <TableBody>
             {rfqs.map((rfq, i) => {
-              const StatusIcon = statusConfig[rfq.status as keyof typeof statusConfig].icon;
+              const config = statusConfig[rfq.status as keyof typeof statusConfig] || statusConfig.draft;
+              const StatusIcon = config.icon;
               return (
                 <TableRow 
-                  key={rfq.id} 
+                  key={rfq.rawId || rfq.id} 
                   className="group hover:bg-muted/30 cursor-pointer transition-colors border-border/50"
                 >
                   <TableCell className="font-mono font-medium">{rfq.id}</TableCell>
@@ -106,9 +117,9 @@ export function RfqListTable() {
                   </TableCell>
                   <TableCell>{rfq.department}</TableCell>
                   <TableCell>
-                    <Badge variant="outline" className={`border-none ${statusConfig[rfq.status as keyof typeof statusConfig].color}`}>
+                    <Badge variant="outline" className={`border-none ${config.color}`}>
                       <StatusIcon className="w-3 h-3 mr-1" />
-                      {rfq.status}
+                      {config.label}
                     </Badge>
                   </TableCell>
                   <TableCell className="text-right font-medium">
@@ -125,12 +136,12 @@ export function RfqListTable() {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end" className="w-[160px] glass-panel">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem onClick={() => navigator.clipboard.writeText(rfq.id)}>
+                        <DropdownMenuItem onClick={() => navigator.clipboard.writeText(rfq.rawId || rfq.id)}>
                           Copy RFQ ID
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        {rfq.status === "Evaluation" && (
-                          <DropdownMenuItem render={<Link href={`/rfqs/${rfq.id.split('-')[1]}/compare`} className="flex items-center text-primary font-medium focus:text-primary" />}>
+                        {rfq.status === "evaluation" && (
+                          <DropdownMenuItem render={<Link href={`/rfqs/${(rfq.rawId || rfq.id).split('-')[1] || rfq.id}/compare`} className="flex items-center text-primary font-medium focus:text-primary" />}>
                               Compare Quotes <ArrowUpRight className="w-4 h-4 ml-auto" />
                           </DropdownMenuItem>
                         )}
