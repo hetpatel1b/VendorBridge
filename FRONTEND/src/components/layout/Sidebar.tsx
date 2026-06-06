@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { 
-  Box, LayoutDashboard, Users, Package, ShoppingCart, PieChart, MessageSquare, FileText, Settings, LogOut, ChevronLeft, ChevronRight
+  Box, LayoutDashboard, Users, Package, ShoppingCart, PieChart, FileCheck, Receipt, Settings, LogOut, ChevronLeft, ChevronRight
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { supabase } from "@/lib/supabaseClient";
@@ -11,14 +11,14 @@ import { toast } from "sonner";
 import { useAppStore } from "@/lib/store";
 import { cn } from "@/lib/utils";
 
-const navItems = [
+const navItems: { name: string; href: string; icon: any; badge?: string }[] = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Vendors", href: "/vendors", icon: Users },
-  { name: "Products", href: "/products", icon: Package },
-  { name: "Orders", href: "/orders", icon: ShoppingCart },
+  { name: "RFQs", href: "/rfqs", icon: Package },
+  { name: "Purchase Orders", href: "/purchase-orders", icon: ShoppingCart },
+  { name: "Approvals", href: "/approvals", icon: FileCheck },
+  { name: "Invoices", href: "/invoices", icon: Receipt },
   { name: "Analytics", href: "/analytics", icon: PieChart },
-  { name: "Messages", href: "/messages", icon: MessageSquare, badge: "3" },
-  { name: "Reports", href: "/reports", icon: FileText },
 ];
 
 export function Sidebar() {
