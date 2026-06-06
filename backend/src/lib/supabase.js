@@ -285,7 +285,54 @@ class MockSupabaseClient {
                 return new MockQueryBuilder(table, db).select(fields, options);
             },
             insert: (records) => {
-                return new MockQueryBuilder(table, db).insert(records);
+                const execute = async () => {
+                    const currentDb = readDb();
+                    if (!currentDb[table]) currentDb[table] = [];
+                    const rowsToInsert = Array.isArray(records) ? records : [records];
+                    const inserted = [];
+                    
+                    rowsToInsert.forEach(row => {
+                        const existingIdx = row.id ? currentDb[table].findIndex(r => r.id === row.id) : -1;
+                        if (existingIdx > -1) {
+                            currentDb[table][existingIdx] = {
+                                ...currentDb[table][existingIdx],
+                                ...row,
+                                updated_at: new Date().toISOString()
+                            };
+                            inserted.push(currentDb[table][existingIdx]);
+                        } else {
+                            const newRow = {
+                                id: row.id || crypto.randomUUID(),
+                                created_at: new Date().toISOString(),
+                                ...row
+                            };
+                            currentDb[table].push(newRow);
+                            inserted.push(newRow);
+                        }
+                    });
+                    
+                    writeDb(currentDb);
+                    return {
+                        data: Array.isArray(records) ? inserted : inserted[0],
+                        error: null
+                    };
+                };
+                
+                const promise = execute();
+                promise.select = (fields) => {
+                    const selectPromise = promise.then(res => ({
+                        data: res.data,
+                        error: res.error
+                    }));
+                    selectPromise.single = () => {
+                        return selectPromise.then(res => ({
+                            data: Array.isArray(res.data) ? res.data[0] : res.data,
+                            error: res.error
+                        }));
+                    };
+                    return selectPromise;
+                };
+                return promise;
             },
             update: (values) => {
                 return new MockMutationBuilder(table, 'update', values);

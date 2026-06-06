@@ -79,6 +79,52 @@
       "role": "vendor",
       "phone": "+91-9876500014",
       "is_active": true
+    },
+    {
+      "id": "a9b34748-0fa2-4e20-8b5a-5d34c947ea81",
+      "email": "hetpatel1b@gmail.com",
+      "password": "Het@892007",
+      "first_name": "",
+      "last_name": "",
+      "role": "vendor",
+      "is_active": true,
+      "created_at": "2026-06-06T08:02:11.595Z"
+    },
+    {
+      "id": "dfbd9467-03a5-4e5a-bbab-92d7c9131cc4",
+      "email": "bhavika00019@gmail.com",
+      "password": "Het@892007",
+      "first_name": "",
+      "last_name": "",
+      "role": "vendor",
+      "is_active": true,
+      "created_at": "2026-06-06T08:02:20.050Z"
+    },
+    {
+      "id": "f88fd790-792b-4a45-80be-f0ecd4350e8f",
+      "email": "test_1780733107695@example.com",
+      "password": "Password@123",
+      "first_name": "John",
+      "last_name": "Doe",
+      "role": "vendor",
+      "is_active": true,
+      "created_at": "2026-06-06T08:05:07.698Z",
+      "password_hash": "managed_by_supabase_auth",
+      "phone": "1234567890",
+      "updated_at": "2026-06-06T08:05:07.703Z"
+    },
+    {
+      "id": "428175ae-02a9-40b8-a84b-6294b8d4666d",
+      "email": "test_user_ui@example.com",
+      "password": "Password@123",
+      "first_name": "Demo",
+      "last_name": "User",
+      "role": "vendor",
+      "is_active": true,
+      "created_at": "2026-06-06T08:07:29.250Z",
+      "password_hash": "managed_by_supabase_auth",
+      "phone": null,
+      "updated_at": "2026-06-06T08:07:29.255Z"
     }
   ],
   "vendors": [
@@ -96,7 +142,7 @@
       "category": "IT & Electronics",
       "status": "approved",
       "payment_terms": 30,
-      "rating_avg": 4.20,
+      "rating_avg": 4.2,
       "total_orders": 28
     },
     {
@@ -113,7 +159,7 @@
       "category": "Office Supplies",
       "status": "approved",
       "payment_terms": 45,
-      "rating_avg": 3.80,
+      "rating_avg": 3.8,
       "total_orders": 42
     },
     {
@@ -130,7 +176,7 @@
       "category": "Raw Materials",
       "status": "approved",
       "payment_terms": 60,
-      "rating_avg": 4.50,
+      "rating_avg": 4.5,
       "total_orders": 15
     },
     {
@@ -147,7 +193,7 @@
       "category": "Safety Equipment",
       "status": "approved",
       "payment_terms": 30,
-      "rating_avg": 3.50,
+      "rating_avg": 3.5,
       "total_orders": 8
     },
     {
@@ -164,7 +210,7 @@
       "category": "Furniture",
       "status": "pending",
       "payment_terms": 30,
-      "rating_avg": 0.00,
+      "rating_avg": 0,
       "total_orders": 0
     }
   ],
@@ -173,7 +219,7 @@
       "id": "vr000000-0000-0000-0000-000000000001",
       "vendor_id": "v0000000-0000-0000-0000-000000000001",
       "quality_score": 4.5,
-      "delivery_score": 4.0,
+      "delivery_score": 4,
       "price_score": 3.8,
       "response_score": 4.5,
       "overall_score": 4.2,
@@ -183,10 +229,10 @@
     {
       "id": "vr000000-0000-0000-0000-000000000002",
       "vendor_id": "v0000000-0000-0000-0000-000000000001",
-      "quality_score": 4.0,
+      "quality_score": 4,
       "delivery_score": 4.5,
-      "price_score": 4.0,
-      "response_score": 4.0,
+      "price_score": 4,
+      "response_score": 4,
       "overall_score": 4.15,
       "comments": "On-time delivery, good pricing for monitors",
       "rated_by": "a0000000-0000-0000-0000-000000000002"
@@ -195,7 +241,7 @@
       "id": "vr000000-0000-0000-0000-000000000003",
       "vendor_id": "v0000000-0000-0000-0000-000000000001",
       "quality_score": 4.5,
-      "delivery_score": 4.0,
+      "delivery_score": 4,
       "price_score": 4.2,
       "response_score": 4.5,
       "overall_score": 4.3,
@@ -206,7 +252,7 @@
       "id": "vr000000-0000-0000-0000-000000000004",
       "vendor_id": "v0000000-0000-0000-0000-000000000002",
       "quality_score": 3.5,
-      "delivery_score": 4.0,
+      "delivery_score": 4,
       "price_score": 4.5,
       "response_score": 3.5,
       "overall_score": 3.9,
@@ -216,10 +262,10 @@
     {
       "id": "vr000000-0000-0000-0000-000000000005",
       "vendor_id": "v0000000-0000-0000-0000-000000000002",
-      "quality_score": 4.0,
+      "quality_score": 4,
       "delivery_score": 3.5,
-      "price_score": 4.0,
-      "response_score": 4.0,
+      "price_score": 4,
+      "response_score": 4,
       "overall_score": 3.85,
       "comments": "Good stationery, slightly late delivery",
       "rated_by": "a0000000-0000-0000-0000-000000000002"
@@ -227,9 +273,9 @@
     {
       "id": "vr000000-0000-0000-0000-000000000006",
       "vendor_id": "v0000000-0000-0000-0000-000000000003",
-      "quality_score": 5.0,
+      "quality_score": 5,
       "delivery_score": 4.5,
-      "price_score": 4.0,
+      "price_score": 4,
       "response_score": 4.5,
       "overall_score": 4.5,
       "comments": "Premium raw materials, consistent quality",
@@ -239,9 +285,9 @@
       "id": "vr000000-0000-0000-0000-000000000007",
       "vendor_id": "v0000000-0000-0000-0000-000000000003",
       "quality_score": 4.5,
-      "delivery_score": 5.0,
+      "delivery_score": 5,
       "price_score": 4.5,
-      "response_score": 4.0,
+      "response_score": 4,
       "overall_score": 4.55,
       "comments": "Excellent delivery record",
       "rated_by": "a0000000-0000-0000-0000-000000000002"
@@ -257,7 +303,7 @@
       "status": "awarded",
       "priority": "high",
       "submission_deadline": "2026-06-15T12:00:00Z",
-      "budget_estimate": 1875000.00,
+      "budget_estimate": 1875000,
       "created_by": "a0000000-0000-0000-0000-000000000002",
       "created_at": "2026-05-17T09:00:00Z"
     },
@@ -270,7 +316,7 @@
       "status": "open",
       "priority": "medium",
       "submission_deadline": "2026-06-11T12:00:00Z",
-      "budget_estimate": 350000.00,
+      "budget_estimate": 350000,
       "created_by": "a0000000-0000-0000-0000-000000000002",
       "created_at": "2026-06-01T10:00:00Z"
     },
@@ -283,7 +329,7 @@
       "status": "draft",
       "priority": "urgent",
       "submission_deadline": "2026-06-21T12:00:00Z",
-      "budget_estimate": 520000.00,
+      "budget_estimate": 520000,
       "created_by": "a0000000-0000-0000-0000-000000000002",
       "created_at": "2026-06-05T08:00:00Z"
     }
@@ -296,7 +342,7 @@
       "description": "16GB RAM, 512GB SSD, 14\" FHD Display",
       "quantity": 20,
       "unit": "pcs",
-      "estimated_unit_price": 65000.00,
+      "estimated_unit_price": 65000,
       "sort_order": 1
     },
     {
@@ -306,7 +352,7 @@
       "description": "32GB RAM, 1TB SSD, 15.6\" 4K Display",
       "quantity": 5,
       "unit": "pcs",
-      "estimated_unit_price": 125000.00,
+      "estimated_unit_price": 125000,
       "sort_order": 2
     },
     {
@@ -316,7 +362,7 @@
       "description": "Premium padded carry bag with compartments",
       "quantity": 25,
       "unit": "pcs",
-      "estimated_unit_price": 2000.00,
+      "estimated_unit_price": 2000,
       "sort_order": 3
     },
     {
@@ -326,7 +372,7 @@
       "description": "Ergonomic wireless mouse, USB-C receiver",
       "quantity": 25,
       "unit": "pcs",
-      "estimated_unit_price": 1500.00,
+      "estimated_unit_price": 1500,
       "sort_order": 4
     },
     {
@@ -336,7 +382,7 @@
       "description": "500 sheets/ream, white",
       "quantity": 200,
       "unit": "ream",
-      "estimated_unit_price": 350.00,
+      "estimated_unit_price": 350,
       "sort_order": 1
     },
     {
@@ -346,7 +392,7 @@
       "description": "HP LaserJet compatible, black",
       "quantity": 30,
       "unit": "pcs",
-      "estimated_unit_price": 3500.00,
+      "estimated_unit_price": 3500,
       "sort_order": 2
     },
     {
@@ -356,7 +402,7 @@
       "description": "Pack of 20, medium point",
       "quantity": 50,
       "unit": "pack",
-      "estimated_unit_price": 200.00,
+      "estimated_unit_price": 200,
       "sort_order": 3
     },
     {
@@ -366,7 +412,7 @@
       "description": "Pack of 12 pads, assorted colors",
       "quantity": 40,
       "unit": "pack",
-      "estimated_unit_price": 250.00,
+      "estimated_unit_price": 250,
       "sort_order": 4
     },
     {
@@ -376,7 +422,7 @@
       "description": "Yellow, adjustable, ventilated",
       "quantity": 100,
       "unit": "pcs",
-      "estimated_unit_price": 450.00,
+      "estimated_unit_price": 450,
       "sort_order": 1
     },
     {
@@ -386,7 +432,7 @@
       "description": "Anti-fog, UV protection",
       "quantity": 100,
       "unit": "pcs",
-      "estimated_unit_price": 350.00,
+      "estimated_unit_price": 350,
       "sort_order": 2
     },
     {
@@ -396,7 +442,7 @@
       "description": "Level 5, latex coated",
       "quantity": 200,
       "unit": "pair",
-      "estimated_unit_price": 300.00,
+      "estimated_unit_price": 300,
       "sort_order": 3
     },
     {
@@ -406,7 +452,7 @@
       "description": "4 kg, ISI marked, with wall bracket",
       "quantity": 20,
       "unit": "pcs",
-      "estimated_unit_price": 2500.00,
+      "estimated_unit_price": 2500,
       "sort_order": 4
     }
   ],
@@ -454,7 +500,7 @@
       "rfq_id": "r0000000-0000-0000-0000-000000000001",
       "vendor_id": "v0000000-0000-0000-0000-000000000001",
       "status": "selected",
-      "total_amount": 1725000.00,
+      "total_amount": 1725000,
       "delivery_days": 14,
       "payment_terms": "Net 30",
       "notes": "Bulk discount applied. 3-year on-site warranty included.",
@@ -467,7 +513,7 @@
       "rfq_id": "r0000000-0000-0000-0000-000000000001",
       "vendor_id": "v0000000-0000-0000-0000-000000000002",
       "status": "rejected",
-      "total_amount": 1650000.00,
+      "total_amount": 1650000,
       "delivery_days": 28,
       "payment_terms": "Net 45",
       "notes": "Standard warranty only. Delivery from Delhi warehouse.",
@@ -480,7 +526,7 @@
       "rfq_id": "r0000000-0000-0000-0000-000000000001",
       "vendor_id": "v0000000-0000-0000-0000-000000000003",
       "status": "rejected",
-      "total_amount": 1890000.00,
+      "total_amount": 1890000,
       "delivery_days": 10,
       "payment_terms": "Net 60",
       "notes": "Premium tier laptops with 5-year warranty. Priority support included.",
@@ -493,7 +539,7 @@
       "rfq_id": "r0000000-0000-0000-0000-000000000002",
       "vendor_id": "v0000000-0000-0000-0000-000000000002",
       "status": "submitted",
-      "total_amount": 285000.00,
+      "total_amount": 285000,
       "delivery_days": 7,
       "payment_terms": "Net 30",
       "notes": "Annual rate contract pricing applied. Free delivery above ₹10,000 per batch.",
@@ -509,8 +555,8 @@
       "item_name": "High-Performance Laptop (i7/Ryzen 7)",
       "quantity": 20,
       "unit": "pcs",
-      "unit_price": 62000.00,
-      "total_price": 1240000.00,
+      "unit_price": 62000,
+      "total_price": 1240000,
       "tax_rate": 18
     },
     {
@@ -520,8 +566,8 @@
       "item_name": "Workstation Laptop (i9/Ryzen 9)",
       "quantity": 5,
       "unit": "pcs",
-      "unit_price": 118000.00,
-      "total_price": 590000.00,
+      "unit_price": 118000,
+      "total_price": 590000,
       "tax_rate": 18
     },
     {
@@ -531,8 +577,8 @@
       "item_name": "Laptop Carry Bag",
       "quantity": 25,
       "unit": "pcs",
-      "unit_price": 1800.00,
-      "total_price": 45000.00,
+      "unit_price": 1800,
+      "total_price": 45000,
       "tax_rate": 18
     },
     {
@@ -542,8 +588,8 @@
       "item_name": "Wireless Mouse",
       "quantity": 25,
       "unit": "pcs",
-      "unit_price": 1200.00,
-      "total_price": 30000.00,
+      "unit_price": 1200,
+      "total_price": 30000,
       "tax_rate": 18
     },
     {
@@ -553,8 +599,8 @@
       "item_name": "High-Performance Laptop (i7/Ryzen 7)",
       "quantity": 20,
       "unit": "pcs",
-      "unit_price": 58000.00,
-      "total_price": 1160000.00,
+      "unit_price": 58000,
+      "total_price": 1160000,
       "tax_rate": 18
     },
     {
@@ -564,8 +610,8 @@
       "item_name": "Workstation Laptop (i9/Ryzen 9)",
       "quantity": 5,
       "unit": "pcs",
-      "unit_price": 115000.00,
-      "total_price": 575000.00,
+      "unit_price": 115000,
+      "total_price": 575000,
       "tax_rate": 18
     },
     {
@@ -575,8 +621,8 @@
       "item_name": "Laptop Carry Bag",
       "quantity": 25,
       "unit": "pcs",
-      "unit_price": 2200.00,
-      "total_price": 55000.00,
+      "unit_price": 2200,
+      "total_price": 55000,
       "tax_rate": 18
     },
     {
@@ -586,8 +632,8 @@
       "item_name": "Wireless Mouse",
       "quantity": 25,
       "unit": "pcs",
-      "unit_price": 1400.00,
-      "total_price": 35000.00,
+      "unit_price": 1400,
+      "total_price": 35000,
       "tax_rate": 18
     },
     {
@@ -597,8 +643,8 @@
       "item_name": "High-Performance Laptop (i7/Ryzen 7)",
       "quantity": 20,
       "unit": "pcs",
-      "unit_price": 68000.00,
-      "total_price": 1360000.00,
+      "unit_price": 68000,
+      "total_price": 1360000,
       "tax_rate": 18
     },
     {
@@ -608,8 +654,8 @@
       "item_name": "Workstation Laptop (i9/Ryzen 9)",
       "quantity": 5,
       "unit": "pcs",
-      "unit_price": 130000.00,
-      "total_price": 650000.00,
+      "unit_price": 130000,
+      "total_price": 650000,
       "tax_rate": 18
     },
     {
@@ -619,8 +665,8 @@
       "item_name": "Laptop Carry Bag",
       "quantity": 25,
       "unit": "pcs",
-      "unit_price": 1500.00,
-      "total_price": 37500.00,
+      "unit_price": 1500,
+      "total_price": 37500,
       "tax_rate": 18
     },
     {
@@ -630,8 +676,8 @@
       "item_name": "Wireless Mouse",
       "quantity": 25,
       "unit": "pcs",
-      "unit_price": 1000.00,
-      "total_price": 25000.00,
+      "unit_price": 1000,
+      "total_price": 25000,
       "tax_rate": 18
     },
     {
@@ -641,8 +687,8 @@
       "item_name": "A4 Copier Paper (75 GSM)",
       "quantity": 200,
       "unit": "ream",
-      "unit_price": 320.00,
-      "total_price": 64000.00,
+      "unit_price": 320,
+      "total_price": 64000,
       "tax_rate": 12
     },
     {
@@ -652,8 +698,8 @@
       "item_name": "Printer Toner Cartridge (HP)",
       "quantity": 30,
       "unit": "pcs",
-      "unit_price": 3200.00,
-      "total_price": 96000.00,
+      "unit_price": 3200,
+      "total_price": 96000,
       "tax_rate": 18
     },
     {
@@ -663,8 +709,8 @@
       "item_name": "Ball Pens (Blue)",
       "quantity": 50,
       "unit": "pack",
-      "unit_price": 180.00,
-      "total_price": 9000.00,
+      "unit_price": 180,
+      "total_price": 9000,
       "tax_rate": 12
     },
     {
@@ -674,8 +720,8 @@
       "item_name": "Sticky Notes (3x3)",
       "quantity": 40,
       "unit": "pack",
-      "unit_price": 220.00,
-      "total_price": 8800.00,
+      "unit_price": 220,
+      "total_price": 8800,
       "tax_rate": 12
     }
   ],
@@ -687,9 +733,9 @@
       "quotation_id": "q0000000-0000-0000-0000-000000000001",
       "vendor_id": "v0000000-0000-0000-0000-000000000001",
       "status": "acknowledged",
-      "total_amount": 1725000.00,
-      "tax_amount": 310500.00,
-      "grand_total": 2035500.00,
+      "total_amount": 1725000,
+      "tax_amount": 310500,
+      "grand_total": 2035500,
       "currency": "INR",
       "payment_terms": 30,
       "delivery_date": "2026-06-13",
@@ -708,9 +754,9 @@
       "quotation_id": null,
       "vendor_id": "v0000000-0000-0000-0000-000000000002",
       "status": "closed",
-      "total_amount": 185000.00,
-      "tax_amount": 22200.00,
-      "grand_total": 207200.00,
+      "total_amount": 185000,
+      "tax_amount": 22200,
+      "grand_total": 207200,
       "currency": "INR",
       "payment_terms": 45,
       "delivery_date": "2026-04-07",
@@ -726,9 +772,9 @@
       "quotation_id": null,
       "vendor_id": "v0000000-0000-0000-0000-000000000001",
       "status": "closed",
-      "total_amount": 450000.00,
-      "tax_amount": 81000.00,
-      "grand_total": 531000.00,
+      "total_amount": 450000,
+      "tax_amount": 81000,
+      "grand_total": 531000,
       "currency": "INR",
       "payment_terms": 30,
       "delivery_date": "2026-04-22",
@@ -744,9 +790,9 @@
       "quotation_id": null,
       "vendor_id": "v0000000-0000-0000-0000-000000000003",
       "status": "received",
-      "total_amount": 320000.00,
-      "tax_amount": 57600.00,
-      "grand_total": 377600.00,
+      "total_amount": 320000,
+      "tax_amount": 57600,
+      "grand_total": 377600,
       "currency": "INR",
       "payment_terms": 60,
       "delivery_date": "2026-05-17",
@@ -762,9 +808,9 @@
       "quotation_id": null,
       "vendor_id": "v0000000-0000-0000-0000-000000000001",
       "status": "closed",
-      "total_amount": 275000.00,
-      "tax_amount": 49500.00,
-      "grand_total": 324500.00,
+      "total_amount": 275000,
+      "tax_amount": 49500,
+      "grand_total": 324500,
       "currency": "INR",
       "payment_terms": 30,
       "delivery_date": "2026-03-08",
@@ -780,9 +826,9 @@
       "quotation_id": null,
       "vendor_id": "v0000000-0000-0000-0000-000000000002",
       "status": "closed",
-      "total_amount": 92000.00,
-      "tax_amount": 11040.00,
-      "grand_total": 103040.00,
+      "total_amount": 92000,
+      "tax_amount": 11040,
+      "grand_total": 103040,
       "currency": "INR",
       "payment_terms": 45,
       "delivery_date": "2026-02-06",
@@ -800,8 +846,8 @@
       "description": "16GB RAM, 512GB SSD, 14\" FHD",
       "quantity": 20,
       "unit": "pcs",
-      "unit_price": 62000.00,
-      "total_price": 1240000.00,
+      "unit_price": 62000,
+      "total_price": 1240000,
       "tax_rate": 18
     },
     {
@@ -811,8 +857,8 @@
       "description": "32GB RAM, 1TB SSD, 15.6\" 4K",
       "quantity": 5,
       "unit": "pcs",
-      "unit_price": 118000.00,
-      "total_price": 590000.00,
+      "unit_price": 118000,
+      "total_price": 590000,
       "tax_rate": 18
     },
     {
@@ -822,8 +868,8 @@
       "description": "Premium padded",
       "quantity": 25,
       "unit": "pcs",
-      "unit_price": 1800.00,
-      "total_price": 45000.00,
+      "unit_price": 1800,
+      "total_price": 45000,
       "tax_rate": 18
     },
     {
@@ -833,8 +879,8 @@
       "description": "Ergonomic, USB-C",
       "quantity": 25,
       "unit": "pcs",
-      "unit_price": 1200.00,
-      "total_price": 30000.00,
+      "unit_price": 1200,
+      "total_price": 30000,
       "tax_rate": 18
     }
   ],
@@ -871,9 +917,9 @@
       "status": "paid",
       "invoice_date": "2026-04-27",
       "due_date": "2026-05-27",
-      "subtotal": 450000.00,
-      "tax_amount": 81000.00,
-      "total_amount": 531000.00,
+      "subtotal": 450000,
+      "tax_amount": 81000,
+      "total_amount": 531000,
       "currency": "INR",
       "submitted_by": "a0000000-0000-0000-0000-000000000010",
       "approved_by": "a0000000-0000-0000-0000-000000000002",
@@ -888,9 +934,9 @@
       "status": "paid",
       "invoice_date": "2026-04-12",
       "due_date": "2026-05-27",
-      "subtotal": 185000.00,
-      "tax_amount": 22200.00,
-      "total_amount": 207200.00,
+      "subtotal": 185000,
+      "tax_amount": 22200,
+      "total_amount": 207200,
       "currency": "INR",
       "submitted_by": "a0000000-0000-0000-0000-000000000011",
       "approved_by": "a0000000-0000-0000-0000-000000000002",
@@ -905,9 +951,9 @@
       "status": "pending",
       "invoice_date": "2026-06-06",
       "due_date": "2026-08-05",
-      "subtotal": 320000.00,
-      "tax_amount": 57600.00,
-      "total_amount": 377600.00,
+      "subtotal": 320000,
+      "tax_amount": 57600,
+      "total_amount": 377600,
       "currency": "INR",
       "submitted_by": "a0000000-0000-0000-0000-000000000012",
       "approved_by": null,
