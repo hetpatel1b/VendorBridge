@@ -4,6 +4,7 @@ import authRoutes from './routes/auth.js';
 import vendorRoutes from './routes/vendors.js';
 import rfqRoutes from './routes/rfqs.js';
 import quotationRoutes from './routes/quotations.js';
+import dbProxy from './routes/dbProxy.js';
 import { requireAuth } from './middleware/auth.js';
 
 const app = express();
@@ -61,6 +62,7 @@ app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/vendors', vendorRoutes);
 app.use('/api/v1/rfqs', rfqRoutes);
 app.use('/api/v1/quotations', quotationRoutes);
+app.use('/api/v1/db', dbProxy);
 
 // Endpoint: GET /api/v1/profile (Protected, accessible by any user role)
 app.get('/api/v1/profile', requireAuth, (req, res) => {

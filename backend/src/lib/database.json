@@ -1,0 +1,1108 @@
+{
+  "users": [
+    {
+      "id": "a0000000-0000-0000-0000-000000000001",
+      "email": "admin@vendorbridge.com",
+      "password": "Password@123",
+      "first_name": "Meera",
+      "last_name": "Sharma",
+      "role": "admin",
+      "phone": "+91-9876500001",
+      "is_active": true
+    },
+    {
+      "id": "a0000000-0000-0000-0000-000000000002",
+      "email": "priya@vendorbridge.com",
+      "password": "Password@123",
+      "first_name": "Priya",
+      "last_name": "Patel",
+      "role": "procurement_officer",
+      "phone": "+91-9876500002",
+      "is_active": true
+    },
+    {
+      "id": "a0000000-0000-0000-0000-000000000003",
+      "email": "anand@vendorbridge.com",
+      "password": "Password@123",
+      "first_name": "Anand",
+      "last_name": "Mehta",
+      "role": "manager",
+      "phone": "+91-9876500003",
+      "is_active": true
+    },
+    {
+      "id": "a0000000-0000-0000-0000-000000000010",
+      "email": "rajesh@techsupply.in",
+      "password": "Password@123",
+      "first_name": "Rajesh",
+      "last_name": "Kumar",
+      "role": "vendor",
+      "phone": "+91-9876500010",
+      "is_active": true
+    },
+    {
+      "id": "a0000000-0000-0000-0000-000000000011",
+      "email": "amit@officeworld.in",
+      "password": "Password@123",
+      "first_name": "Amit",
+      "last_name": "Singh",
+      "role": "vendor",
+      "phone": "+91-9876500011",
+      "is_active": true
+    },
+    {
+      "id": "a0000000-0000-0000-0000-000000000012",
+      "email": "neha@globalparts.in",
+      "password": "Password@123",
+      "first_name": "Neha",
+      "last_name": "Gupta",
+      "role": "vendor",
+      "phone": "+91-9876500012",
+      "is_active": true
+    },
+    {
+      "id": "a0000000-0000-0000-0000-000000000013",
+      "email": "vikram@safetyplus.in",
+      "password": "Password@123",
+      "first_name": "Vikram",
+      "last_name": "Desai",
+      "role": "vendor",
+      "phone": "+91-9876500013",
+      "is_active": true
+    },
+    {
+      "id": "a0000000-0000-0000-0000-000000000014",
+      "email": "sanjay@furnpro.in",
+      "password": "Password@123",
+      "first_name": "Sanjay",
+      "last_name": "Joshi",
+      "role": "vendor",
+      "phone": "+91-9876500014",
+      "is_active": true
+    }
+  ],
+  "vendors": [
+    {
+      "id": "v0000000-0000-0000-0000-000000000001",
+      "user_id": "a0000000-0000-0000-0000-000000000010",
+      "company_name": "TechSupply India Pvt Ltd",
+      "contact_person": "Rajesh Kumar",
+      "email": "rajesh@techsupply.in",
+      "phone": "+91-9876500010",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "country": "India",
+      "tax_id": "27AABCT1234F1Z5",
+      "category": "IT & Electronics",
+      "status": "approved",
+      "payment_terms": 30,
+      "rating_avg": 4.20,
+      "total_orders": 28
+    },
+    {
+      "id": "v0000000-0000-0000-0000-000000000002",
+      "user_id": "a0000000-0000-0000-0000-000000000011",
+      "company_name": "OfficeWorld Solutions",
+      "contact_person": "Amit Singh",
+      "email": "amit@officeworld.in",
+      "phone": "+91-9876500011",
+      "city": "Delhi",
+      "state": "Delhi",
+      "country": "India",
+      "tax_id": "07AABCO5678G2Z3",
+      "category": "Office Supplies",
+      "status": "approved",
+      "payment_terms": 45,
+      "rating_avg": 3.80,
+      "total_orders": 42
+    },
+    {
+      "id": "v0000000-0000-0000-0000-000000000003",
+      "user_id": "a0000000-0000-0000-0000-000000000012",
+      "company_name": "Global Parts Manufacturing",
+      "contact_person": "Neha Gupta",
+      "email": "neha@globalparts.in",
+      "phone": "+91-9876500012",
+      "city": "Pune",
+      "state": "Maharashtra",
+      "country": "India",
+      "tax_id": "27AABCG9012H3Z1",
+      "category": "Raw Materials",
+      "status": "approved",
+      "payment_terms": 60,
+      "rating_avg": 4.50,
+      "total_orders": 15
+    },
+    {
+      "id": "v0000000-0000-0000-0000-000000000004",
+      "user_id": "a0000000-0000-0000-0000-000000000013",
+      "company_name": "SafetyPlus Equipments",
+      "contact_person": "Vikram Desai",
+      "email": "vikram@safetyplus.in",
+      "phone": "+91-9876500013",
+      "city": "Ahmedabad",
+      "state": "Gujarat",
+      "country": "India",
+      "tax_id": "24AABCS3456I4Z7",
+      "category": "Safety Equipment",
+      "status": "approved",
+      "payment_terms": 30,
+      "rating_avg": 3.50,
+      "total_orders": 8
+    },
+    {
+      "id": "v0000000-0000-0000-0000-000000000005",
+      "user_id": "a0000000-0000-0000-0000-000000000014",
+      "company_name": "FurnPro Interiors",
+      "contact_person": "Sanjay Joshi",
+      "email": "sanjay@furnpro.in",
+      "phone": "+91-9876500014",
+      "city": "Bangalore",
+      "state": "Karnataka",
+      "country": "India",
+      "tax_id": "29AABCF7890J5Z2",
+      "category": "Furniture",
+      "status": "pending",
+      "payment_terms": 30,
+      "rating_avg": 0.00,
+      "total_orders": 0
+    }
+  ],
+  "vendor_ratings": [
+    {
+      "id": "vr000000-0000-0000-0000-000000000001",
+      "vendor_id": "v0000000-0000-0000-0000-000000000001",
+      "quality_score": 4.5,
+      "delivery_score": 4.0,
+      "price_score": 3.8,
+      "response_score": 4.5,
+      "overall_score": 4.2,
+      "comments": "Excellent quality laptops, minor delay on bulk order",
+      "rated_by": "a0000000-0000-0000-0000-000000000002"
+    },
+    {
+      "id": "vr000000-0000-0000-0000-000000000002",
+      "vendor_id": "v0000000-0000-0000-0000-000000000001",
+      "quality_score": 4.0,
+      "delivery_score": 4.5,
+      "price_score": 4.0,
+      "response_score": 4.0,
+      "overall_score": 4.15,
+      "comments": "On-time delivery, good pricing for monitors",
+      "rated_by": "a0000000-0000-0000-0000-000000000002"
+    },
+    {
+      "id": "vr000000-0000-0000-0000-000000000003",
+      "vendor_id": "v0000000-0000-0000-0000-000000000001",
+      "quality_score": 4.5,
+      "delivery_score": 4.0,
+      "price_score": 4.2,
+      "response_score": 4.5,
+      "overall_score": 4.3,
+      "comments": "Fast response to urgent network equipment RFQ",
+      "rated_by": "a0000000-0000-0000-0000-000000000002"
+    },
+    {
+      "id": "vr000000-0000-0000-0000-000000000004",
+      "vendor_id": "v0000000-0000-0000-0000-000000000002",
+      "quality_score": 3.5,
+      "delivery_score": 4.0,
+      "price_score": 4.5,
+      "response_score": 3.5,
+      "overall_score": 3.9,
+      "comments": "Competitive pricing but average quality on paper",
+      "rated_by": "a0000000-0000-0000-0000-000000000002"
+    },
+    {
+      "id": "vr000000-0000-0000-0000-000000000005",
+      "vendor_id": "v0000000-0000-0000-0000-000000000002",
+      "quality_score": 4.0,
+      "delivery_score": 3.5,
+      "price_score": 4.0,
+      "response_score": 4.0,
+      "overall_score": 3.85,
+      "comments": "Good stationery, slightly late delivery",
+      "rated_by": "a0000000-0000-0000-0000-000000000002"
+    },
+    {
+      "id": "vr000000-0000-0000-0000-000000000006",
+      "vendor_id": "v0000000-0000-0000-0000-000000000003",
+      "quality_score": 5.0,
+      "delivery_score": 4.5,
+      "price_score": 4.0,
+      "response_score": 4.5,
+      "overall_score": 4.5,
+      "comments": "Premium raw materials, consistent quality",
+      "rated_by": "a0000000-0000-0000-0000-000000000002"
+    },
+    {
+      "id": "vr000000-0000-0000-0000-000000000007",
+      "vendor_id": "v0000000-0000-0000-0000-000000000003",
+      "quality_score": 4.5,
+      "delivery_score": 5.0,
+      "price_score": 4.5,
+      "response_score": 4.0,
+      "overall_score": 4.55,
+      "comments": "Excellent delivery record",
+      "rated_by": "a0000000-0000-0000-0000-000000000002"
+    }
+  ],
+  "rfqs": [
+    {
+      "id": "r0000000-0000-0000-0000-000000000001",
+      "rfq_number": "RFQ-2026-0001",
+      "title": "Q3 Laptop Procurement — Engineering Team",
+      "description": "Procurement of 25 high-performance laptops for the engineering department. Must include 16GB RAM minimum, SSD storage, and 3-year warranty.",
+      "category": "IT & Electronics",
+      "status": "awarded",
+      "priority": "high",
+      "submission_deadline": "2026-06-15T12:00:00Z",
+      "budget_estimate": 1875000.00,
+      "created_by": "a0000000-0000-0000-0000-000000000002",
+      "created_at": "2026-05-17T09:00:00Z"
+    },
+    {
+      "id": "r0000000-0000-0000-0000-000000000002",
+      "rfq_number": "RFQ-2026-0002",
+      "title": "Annual Office Supplies — All Departments",
+      "description": "Annual supply contract for office stationery, printer consumables, and desk accessories. Delivery in 3 batches over 12 months.",
+      "category": "Office Supplies",
+      "status": "open",
+      "priority": "medium",
+      "submission_deadline": "2026-06-11T12:00:00Z",
+      "budget_estimate": 350000.00,
+      "created_by": "a0000000-0000-0000-0000-000000000002",
+      "created_at": "2026-06-01T10:00:00Z"
+    },
+    {
+      "id": "r0000000-0000-0000-0000-000000000003",
+      "rfq_number": "RFQ-2026-0003",
+      "title": "Safety Equipment Renewal — Factory Floor",
+      "description": "Replace expired safety helmets, goggles, gloves, and fire extinguishers for factory floor compliance audit.",
+      "category": "Safety Equipment",
+      "status": "draft",
+      "priority": "urgent",
+      "submission_deadline": "2026-06-21T12:00:00Z",
+      "budget_estimate": 520000.00,
+      "created_by": "a0000000-0000-0000-0000-000000000002",
+      "created_at": "2026-06-05T08:00:00Z"
+    }
+  ],
+  "rfq_items": [
+    {
+      "id": "ri000000-0000-0000-0000-000000000001",
+      "rfq_id": "r0000000-0000-0000-0000-000000000001",
+      "item_name": "High-Performance Laptop (i7/Ryzen 7)",
+      "description": "16GB RAM, 512GB SSD, 14\" FHD Display",
+      "quantity": 20,
+      "unit": "pcs",
+      "estimated_unit_price": 65000.00,
+      "sort_order": 1
+    },
+    {
+      "id": "ri000000-0000-0000-0000-000000000002",
+      "rfq_id": "r0000000-0000-0000-0000-000000000001",
+      "item_name": "Workstation Laptop (i9/Ryzen 9)",
+      "description": "32GB RAM, 1TB SSD, 15.6\" 4K Display",
+      "quantity": 5,
+      "unit": "pcs",
+      "estimated_unit_price": 125000.00,
+      "sort_order": 2
+    },
+    {
+      "id": "ri000000-0000-0000-0000-000000000003",
+      "rfq_id": "r0000000-0000-0000-0000-000000000001",
+      "item_name": "Laptop Carry Bag",
+      "description": "Premium padded carry bag with compartments",
+      "quantity": 25,
+      "unit": "pcs",
+      "estimated_unit_price": 2000.00,
+      "sort_order": 3
+    },
+    {
+      "id": "ri000000-0000-0000-0000-000000000004",
+      "rfq_id": "r0000000-0000-0000-0000-000000000001",
+      "item_name": "Wireless Mouse",
+      "description": "Ergonomic wireless mouse, USB-C receiver",
+      "quantity": 25,
+      "unit": "pcs",
+      "estimated_unit_price": 1500.00,
+      "sort_order": 4
+    },
+    {
+      "id": "ri000000-0000-0000-0000-000000000005",
+      "rfq_id": "r0000000-0000-0000-0000-000000000002",
+      "item_name": "A4 Copier Paper (75 GSM)",
+      "description": "500 sheets/ream, white",
+      "quantity": 200,
+      "unit": "ream",
+      "estimated_unit_price": 350.00,
+      "sort_order": 1
+    },
+    {
+      "id": "ri000000-0000-0000-0000-000000000006",
+      "rfq_id": "r0000000-0000-0000-0000-000000000002",
+      "item_name": "Printer Toner Cartridge (HP)",
+      "description": "HP LaserJet compatible, black",
+      "quantity": 30,
+      "unit": "pcs",
+      "estimated_unit_price": 3500.00,
+      "sort_order": 2
+    },
+    {
+      "id": "ri000000-0000-0000-0000-000000000007",
+      "rfq_id": "r0000000-0000-0000-0000-000000000002",
+      "item_name": "Ball Pens (Blue)",
+      "description": "Pack of 20, medium point",
+      "quantity": 50,
+      "unit": "pack",
+      "estimated_unit_price": 200.00,
+      "sort_order": 3
+    },
+    {
+      "id": "ri000000-0000-0000-0000-000000000008",
+      "rfq_id": "r0000000-0000-0000-0000-000000000002",
+      "item_name": "Sticky Notes (3x3)",
+      "description": "Pack of 12 pads, assorted colors",
+      "quantity": 40,
+      "unit": "pack",
+      "estimated_unit_price": 250.00,
+      "sort_order": 4
+    },
+    {
+      "id": "ri000000-0000-0000-0000-000000000009",
+      "rfq_id": "r0000000-0000-0000-0000-000000000003",
+      "item_name": "Safety Helmet (ISI Certified)",
+      "description": "Yellow, adjustable, ventilated",
+      "quantity": 100,
+      "unit": "pcs",
+      "estimated_unit_price": 450.00,
+      "sort_order": 1
+    },
+    {
+      "id": "ri000000-0000-0000-0000-000000000010",
+      "rfq_id": "r0000000-0000-0000-0000-000000000003",
+      "item_name": "Safety Goggles",
+      "description": "Anti-fog, UV protection",
+      "quantity": 100,
+      "unit": "pcs",
+      "estimated_unit_price": 350.00,
+      "sort_order": 2
+    },
+    {
+      "id": "ri000000-0000-0000-0000-000000000011",
+      "rfq_id": "r0000000-0000-0000-0000-000000000003",
+      "item_name": "Cut-Resistant Gloves",
+      "description": "Level 5, latex coated",
+      "quantity": 200,
+      "unit": "pair",
+      "estimated_unit_price": 300.00,
+      "sort_order": 3
+    },
+    {
+      "id": "ri000000-0000-0000-0000-000000000012",
+      "rfq_id": "r0000000-0000-0000-0000-000000000003",
+      "item_name": "Fire Extinguisher (ABC Type)",
+      "description": "4 kg, ISI marked, with wall bracket",
+      "quantity": 20,
+      "unit": "pcs",
+      "estimated_unit_price": 2500.00,
+      "sort_order": 4
+    }
+  ],
+  "rfq_vendors": [
+    {
+      "rfq_id": "r0000000-0000-0000-0000-000000000001",
+      "vendor_id": "v0000000-0000-0000-0000-000000000001",
+      "responded": true,
+      "invited_at": "2026-05-18T09:00:00Z",
+      "viewed_at": "2026-05-19T10:00:00Z"
+    },
+    {
+      "rfq_id": "r0000000-0000-0000-0000-000000000001",
+      "vendor_id": "v0000000-0000-0000-0000-000000000002",
+      "responded": true,
+      "invited_at": "2026-05-18T09:00:00Z",
+      "viewed_at": "2026-05-20T11:00:00Z"
+    },
+    {
+      "rfq_id": "r0000000-0000-0000-0000-000000000001",
+      "vendor_id": "v0000000-0000-0000-0000-000000000003",
+      "responded": true,
+      "invited_at": "2026-05-18T09:00:00Z",
+      "viewed_at": "2026-05-19T10:30:00Z"
+    },
+    {
+      "rfq_id": "r0000000-0000-0000-0000-000000000002",
+      "vendor_id": "v0000000-0000-0000-0000-000000000002",
+      "responded": true,
+      "invited_at": "2026-06-02T10:00:00Z",
+      "viewed_at": "2026-06-03T09:00:00Z"
+    },
+    {
+      "rfq_id": "r0000000-0000-0000-0000-000000000002",
+      "vendor_id": "v0000000-0000-0000-0000-000000000001",
+      "responded": false,
+      "invited_at": "2026-06-02T10:00:00Z",
+      "viewed_at": "2026-06-04T14:00:00Z"
+    }
+  ],
+  "quotations": [
+    {
+      "id": "q0000000-0000-0000-0000-000000000001",
+      "quotation_number": "QUO-2026-0001",
+      "rfq_id": "r0000000-0000-0000-0000-000000000001",
+      "vendor_id": "v0000000-0000-0000-0000-000000000001",
+      "status": "selected",
+      "total_amount": 1725000.00,
+      "delivery_days": 14,
+      "payment_terms": "Net 30",
+      "notes": "Bulk discount applied. 3-year on-site warranty included.",
+      "submitted_at": "2026-05-22T15:00:00Z",
+      "created_at": "2026-05-22T15:00:00Z"
+    },
+    {
+      "id": "q0000000-0000-0000-0000-000000000002",
+      "quotation_number": "QUO-2026-0002",
+      "rfq_id": "r0000000-0000-0000-0000-000000000001",
+      "vendor_id": "v0000000-0000-0000-0000-000000000002",
+      "status": "rejected",
+      "total_amount": 1650000.00,
+      "delivery_days": 28,
+      "payment_terms": "Net 45",
+      "notes": "Standard warranty only. Delivery from Delhi warehouse.",
+      "submitted_at": "2026-05-23T11:00:00Z",
+      "created_at": "2026-05-23T11:00:00Z"
+    },
+    {
+      "id": "q0000000-0000-0000-0000-000000000003",
+      "quotation_number": "QUO-2026-0003",
+      "rfq_id": "r0000000-0000-0000-0000-000000000001",
+      "vendor_id": "v0000000-0000-0000-0000-000000000003",
+      "status": "rejected",
+      "total_amount": 1890000.00,
+      "delivery_days": 10,
+      "payment_terms": "Net 60",
+      "notes": "Premium tier laptops with 5-year warranty. Priority support included.",
+      "submitted_at": "2026-05-24T16:00:00Z",
+      "created_at": "2026-05-24T16:00:00Z"
+    },
+    {
+      "id": "q0000000-0000-0000-0000-000000000004",
+      "quotation_number": "QUO-2026-0004",
+      "rfq_id": "r0000000-0000-0000-0000-000000000002",
+      "vendor_id": "v0000000-0000-0000-0000-000000000002",
+      "status": "submitted",
+      "total_amount": 285000.00,
+      "delivery_days": 7,
+      "payment_terms": "Net 30",
+      "notes": "Annual rate contract pricing applied. Free delivery above ₹10,000 per batch.",
+      "submitted_at": "2026-06-04T10:00:00Z",
+      "created_at": "2026-06-04T10:00:00Z"
+    }
+  ],
+  "quotation_items": [
+    {
+      "id": "qi000000-0000-0000-0000-000000000001",
+      "quotation_id": "q0000000-0000-0000-0000-000000000001",
+      "rfq_item_id": "ri000000-0000-0000-0000-000000000001",
+      "item_name": "High-Performance Laptop (i7/Ryzen 7)",
+      "quantity": 20,
+      "unit": "pcs",
+      "unit_price": 62000.00,
+      "total_price": 1240000.00,
+      "tax_rate": 18
+    },
+    {
+      "id": "qi000000-0000-0000-0000-000000000002",
+      "quotation_id": "q0000000-0000-0000-0000-000000000001",
+      "rfq_item_id": "ri000000-0000-0000-0000-000000000002",
+      "item_name": "Workstation Laptop (i9/Ryzen 9)",
+      "quantity": 5,
+      "unit": "pcs",
+      "unit_price": 118000.00,
+      "total_price": 590000.00,
+      "tax_rate": 18
+    },
+    {
+      "id": "qi000000-0000-0000-0000-000000000003",
+      "quotation_id": "q0000000-0000-0000-0000-000000000001",
+      "rfq_item_id": "ri000000-0000-0000-0000-000000000003",
+      "item_name": "Laptop Carry Bag",
+      "quantity": 25,
+      "unit": "pcs",
+      "unit_price": 1800.00,
+      "total_price": 45000.00,
+      "tax_rate": 18
+    },
+    {
+      "id": "qi000000-0000-0000-0000-000000000004",
+      "quotation_id": "q0000000-0000-0000-0000-000000000001",
+      "rfq_item_id": "ri000000-0000-0000-0000-000000000004",
+      "item_name": "Wireless Mouse",
+      "quantity": 25,
+      "unit": "pcs",
+      "unit_price": 1200.00,
+      "total_price": 30000.00,
+      "tax_rate": 18
+    },
+    {
+      "id": "qi000000-0000-0000-0000-000000000005",
+      "quotation_id": "q0000000-0000-0000-0000-000000000002",
+      "rfq_item_id": "ri000000-0000-0000-0000-000000000001",
+      "item_name": "High-Performance Laptop (i7/Ryzen 7)",
+      "quantity": 20,
+      "unit": "pcs",
+      "unit_price": 58000.00,
+      "total_price": 1160000.00,
+      "tax_rate": 18
+    },
+    {
+      "id": "qi000000-0000-0000-0000-000000000006",
+      "quotation_id": "q0000000-0000-0000-0000-000000000002",
+      "rfq_item_id": "ri000000-0000-0000-0000-000000000002",
+      "item_name": "Workstation Laptop (i9/Ryzen 9)",
+      "quantity": 5,
+      "unit": "pcs",
+      "unit_price": 115000.00,
+      "total_price": 575000.00,
+      "tax_rate": 18
+    },
+    {
+      "id": "qi000000-0000-0000-0000-000000000007",
+      "quotation_id": "q0000000-0000-0000-0000-000000000002",
+      "rfq_item_id": "ri000000-0000-0000-0000-000000000003",
+      "item_name": "Laptop Carry Bag",
+      "quantity": 25,
+      "unit": "pcs",
+      "unit_price": 2200.00,
+      "total_price": 55000.00,
+      "tax_rate": 18
+    },
+    {
+      "id": "qi000000-0000-0000-0000-000000000008",
+      "quotation_id": "q0000000-0000-0000-0000-000000000002",
+      "rfq_item_id": "ri000000-0000-0000-0000-000000000004",
+      "item_name": "Wireless Mouse",
+      "quantity": 25,
+      "unit": "pcs",
+      "unit_price": 1400.00,
+      "total_price": 35000.00,
+      "tax_rate": 18
+    },
+    {
+      "id": "qi000000-0000-0000-0000-000000000009",
+      "quotation_id": "q0000000-0000-0000-0000-000000000003",
+      "rfq_item_id": "ri000000-0000-0000-0000-000000000001",
+      "item_name": "High-Performance Laptop (i7/Ryzen 7)",
+      "quantity": 20,
+      "unit": "pcs",
+      "unit_price": 68000.00,
+      "total_price": 1360000.00,
+      "tax_rate": 18
+    },
+    {
+      "id": "qi000000-0000-0000-0000-000000000010",
+      "quotation_id": "q0000000-0000-0000-0000-000000000003",
+      "rfq_item_id": "ri000000-0000-0000-0000-000000000002",
+      "item_name": "Workstation Laptop (i9/Ryzen 9)",
+      "quantity": 5,
+      "unit": "pcs",
+      "unit_price": 130000.00,
+      "total_price": 650000.00,
+      "tax_rate": 18
+    },
+    {
+      "id": "qi000000-0000-0000-0000-000000000011",
+      "quotation_id": "q0000000-0000-0000-0000-000000000003",
+      "rfq_item_id": "ri000000-0000-0000-0000-000000000003",
+      "item_name": "Laptop Carry Bag",
+      "quantity": 25,
+      "unit": "pcs",
+      "unit_price": 1500.00,
+      "total_price": 37500.00,
+      "tax_rate": 18
+    },
+    {
+      "id": "qi000000-0000-0000-0000-000000000012",
+      "quotation_id": "q0000000-0000-0000-0000-000000000003",
+      "rfq_item_id": "ri000000-0000-0000-0000-000000000004",
+      "item_name": "Wireless Mouse",
+      "quantity": 25,
+      "unit": "pcs",
+      "unit_price": 1000.00,
+      "total_price": 25000.00,
+      "tax_rate": 18
+    },
+    {
+      "id": "qi000000-0000-0000-0000-000000000013",
+      "quotation_id": "q0000000-0000-0000-0000-000000000004",
+      "rfq_item_id": "ri000000-0000-0000-0000-000000000005",
+      "item_name": "A4 Copier Paper (75 GSM)",
+      "quantity": 200,
+      "unit": "ream",
+      "unit_price": 320.00,
+      "total_price": 64000.00,
+      "tax_rate": 12
+    },
+    {
+      "id": "qi000000-0000-0000-0000-000000000014",
+      "quotation_id": "q0000000-0000-0000-0000-000000000004",
+      "rfq_item_id": "ri000000-0000-0000-0000-000000000006",
+      "item_name": "Printer Toner Cartridge (HP)",
+      "quantity": 30,
+      "unit": "pcs",
+      "unit_price": 3200.00,
+      "total_price": 96000.00,
+      "tax_rate": 18
+    },
+    {
+      "id": "qi000000-0000-0000-0000-000000000015",
+      "quotation_id": "q0000000-0000-0000-0000-000000000004",
+      "rfq_item_id": "ri000000-0000-0000-0000-000000000007",
+      "item_name": "Ball Pens (Blue)",
+      "quantity": 50,
+      "unit": "pack",
+      "unit_price": 180.00,
+      "total_price": 9000.00,
+      "tax_rate": 12
+    },
+    {
+      "id": "qi000000-0000-0000-0000-000000000016",
+      "quotation_id": "q0000000-0000-0000-0000-000000000004",
+      "rfq_item_id": "ri000000-0000-0000-0000-000000000008",
+      "item_name": "Sticky Notes (3x3)",
+      "quantity": 40,
+      "unit": "pack",
+      "unit_price": 220.00,
+      "total_price": 8800.00,
+      "tax_rate": 12
+    }
+  ],
+  "purchase_orders": [
+    {
+      "id": "p0000000-0000-0000-0000-000000000001",
+      "po_number": "PO-2026-0001",
+      "rfq_id": "r0000000-0000-0000-0000-000000000001",
+      "quotation_id": "q0000000-0000-0000-0000-000000000001",
+      "vendor_id": "v0000000-0000-0000-0000-000000000001",
+      "status": "acknowledged",
+      "total_amount": 1725000.00,
+      "tax_amount": 310500.00,
+      "grand_total": 2035500.00,
+      "currency": "INR",
+      "payment_terms": 30,
+      "delivery_date": "2026-06-13",
+      "shipping_address": "VendorBridge HQ, Tower B, 4th Floor, Andheri East, Mumbai - 400069",
+      "notes": "Approved under Q3 IT Budget. Delivery to IT asset room.",
+      "created_by": "a0000000-0000-0000-0000-000000000002",
+      "approved_by": "a0000000-0000-0000-0000-000000000003",
+      "approved_at": "2026-05-31T12:00:00Z",
+      "sent_at": "2026-06-01T09:00:00Z",
+      "created_at": "2026-05-30T10:00:00Z"
+    },
+    {
+      "id": "p0000000-0000-0000-0000-000000000002",
+      "po_number": "PO-2026-0002",
+      "rfq_id": null,
+      "quotation_id": null,
+      "vendor_id": "v0000000-0000-0000-0000-000000000002",
+      "status": "closed",
+      "total_amount": 185000.00,
+      "tax_amount": 22200.00,
+      "grand_total": 207200.00,
+      "currency": "INR",
+      "payment_terms": 45,
+      "delivery_date": "2026-04-07",
+      "created_by": "a0000000-0000-0000-0000-000000000002",
+      "approved_by": "a0000000-0000-0000-0000-000000000003",
+      "approved_at": "2026-04-02T12:00:00Z",
+      "created_at": "2026-03-28T10:00:00Z"
+    },
+    {
+      "id": "p0000000-0000-0000-0000-000000000003",
+      "po_number": "PO-2026-0003",
+      "rfq_id": null,
+      "quotation_id": null,
+      "vendor_id": "v0000000-0000-0000-0000-000000000001",
+      "status": "closed",
+      "total_amount": 450000.00,
+      "tax_amount": 81000.00,
+      "grand_total": 531000.00,
+      "currency": "INR",
+      "payment_terms": 30,
+      "delivery_date": "2026-04-22",
+      "created_by": "a0000000-0000-0000-0000-000000000002",
+      "approved_by": "a0000000-0000-0000-0000-000000000003",
+      "approved_at": "2026-04-17T12:00:00Z",
+      "created_at": "2026-04-12T10:00:00Z"
+    },
+    {
+      "id": "p0000000-0000-0000-0000-000000000004",
+      "po_number": "PO-2026-0004",
+      "rfq_id": null,
+      "quotation_id": null,
+      "vendor_id": "v0000000-0000-0000-0000-000000000003",
+      "status": "received",
+      "total_amount": 320000.00,
+      "tax_amount": 57600.00,
+      "grand_total": 377600.00,
+      "currency": "INR",
+      "payment_terms": 60,
+      "delivery_date": "2026-05-17",
+      "created_by": "a0000000-0000-0000-0000-000000000002",
+      "approved_by": "a0000000-0000-0000-0000-000000000003",
+      "approved_at": "2026-05-07T12:00:00Z",
+      "created_at": "2026-05-02T10:00:00Z"
+    },
+    {
+      "id": "p0000000-0000-0000-0000-000000000005",
+      "po_number": "PO-2026-0005",
+      "rfq_id": null,
+      "quotation_id": null,
+      "vendor_id": "v0000000-0000-0000-0000-000000000001",
+      "status": "closed",
+      "total_amount": 275000.00,
+      "tax_amount": 49500.00,
+      "grand_total": 324500.00,
+      "currency": "INR",
+      "payment_terms": 30,
+      "delivery_date": "2026-03-08",
+      "created_by": "a0000000-0000-0000-0000-000000000002",
+      "approved_by": "a0000000-0000-0000-0000-000000000003",
+      "approved_at": "2026-03-03T12:00:00Z",
+      "created_at": "2026-02-26T10:00:00Z"
+    },
+    {
+      "id": "p0000000-0000-0000-0000-000000000006",
+      "po_number": "PO-2026-0006",
+      "rfq_id": null,
+      "quotation_id": null,
+      "vendor_id": "v0000000-0000-0000-0000-000000000002",
+      "status": "closed",
+      "total_amount": 92000.00,
+      "tax_amount": 11040.00,
+      "grand_total": 103040.00,
+      "currency": "INR",
+      "payment_terms": 45,
+      "delivery_date": "2026-02-06",
+      "created_by": "a0000000-0000-0000-0000-000000000002",
+      "approved_by": "a0000000-0000-0000-0000-000000000003",
+      "approved_at": "2026-02-01T12:00:00Z",
+      "created_at": "2026-01-27T10:00:00Z"
+    }
+  ],
+  "po_items": [
+    {
+      "id": "poi00000-0000-0000-0000-000000000001",
+      "po_id": "p0000000-0000-0000-0000-000000000001",
+      "item_name": "High-Performance Laptop (i7/Ryzen 7)",
+      "description": "16GB RAM, 512GB SSD, 14\" FHD",
+      "quantity": 20,
+      "unit": "pcs",
+      "unit_price": 62000.00,
+      "total_price": 1240000.00,
+      "tax_rate": 18
+    },
+    {
+      "id": "poi00000-0000-0000-0000-000000000002",
+      "po_id": "p0000000-0000-0000-0000-000000000001",
+      "item_name": "Workstation Laptop (i9/Ryzen 9)",
+      "description": "32GB RAM, 1TB SSD, 15.6\" 4K",
+      "quantity": 5,
+      "unit": "pcs",
+      "unit_price": 118000.00,
+      "total_price": 590000.00,
+      "tax_rate": 18
+    },
+    {
+      "id": "poi00000-0000-0000-0000-000000000003",
+      "po_id": "p0000000-0000-0000-0000-000000000001",
+      "item_name": "Laptop Carry Bag",
+      "description": "Premium padded",
+      "quantity": 25,
+      "unit": "pcs",
+      "unit_price": 1800.00,
+      "total_price": 45000.00,
+      "tax_rate": 18
+    },
+    {
+      "id": "poi00000-0000-0000-0000-000000000004",
+      "po_id": "p0000000-0000-0000-0000-000000000001",
+      "item_name": "Wireless Mouse",
+      "description": "Ergonomic, USB-C",
+      "quantity": 25,
+      "unit": "pcs",
+      "unit_price": 1200.00,
+      "total_price": 30000.00,
+      "tax_rate": 18
+    }
+  ],
+  "approvals": [
+    {
+      "id": "ap000000-0000-0000-0000-000000000001",
+      "entity_type": "purchase_order",
+      "entity_id": "p0000000-0000-0000-0000-000000000001",
+      "requested_by": "a0000000-0000-0000-0000-000000000002",
+      "assigned_to": "a0000000-0000-0000-0000-000000000003",
+      "status": "approved",
+      "approval_level": 1,
+      "comments": "Within Q3 IT budget. Approved.",
+      "decided_at": "2026-05-31T12:00:00Z"
+    },
+    {
+      "id": "ap000000-0000-0000-0000-000000000002",
+      "entity_type": "purchase_order",
+      "entity_id": "p0000000-0000-0000-0000-000000000004",
+      "requested_by": "a0000000-0000-0000-0000-000000000002",
+      "assigned_to": "a0000000-0000-0000-0000-000000000003",
+      "status": "pending",
+      "approval_level": 1,
+      "comments": null,
+      "decided_at": null
+    }
+  ],
+  "invoices": [
+    {
+      "id": "i0000000-0000-0000-0000-000000000001",
+      "invoice_number": "INV-TS-2026-042",
+      "po_id": "p0000000-0000-0000-0000-000000000003",
+      "vendor_id": "v0000000-0000-0000-0000-000000000001",
+      "status": "paid",
+      "invoice_date": "2026-04-27",
+      "due_date": "2026-05-27",
+      "subtotal": 450000.00,
+      "tax_amount": 81000.00,
+      "total_amount": 531000.00,
+      "currency": "INR",
+      "submitted_by": "a0000000-0000-0000-0000-000000000010",
+      "approved_by": "a0000000-0000-0000-0000-000000000002",
+      "approved_at": "2026-04-29T10:00:00Z",
+      "paid_at": "2026-05-29T14:00:00Z"
+    },
+    {
+      "id": "i0000000-0000-0000-0000-000000000002",
+      "invoice_number": "INV-OW-2026-118",
+      "po_id": "p0000000-0000-0000-0000-000000000002",
+      "vendor_id": "v0000000-0000-0000-0000-000000000002",
+      "status": "paid",
+      "invoice_date": "2026-04-12",
+      "due_date": "2026-05-27",
+      "subtotal": 185000.00,
+      "tax_amount": 22200.00,
+      "total_amount": 207200.00,
+      "currency": "INR",
+      "submitted_by": "a0000000-0000-0000-0000-000000000011",
+      "approved_by": "a0000000-0000-0000-0000-000000000002",
+      "approved_at": "2026-04-17T10:00:00Z",
+      "paid_at": "2026-05-22T14:00:00Z"
+    },
+    {
+      "id": "i0000000-0000-0000-0000-000000000003",
+      "invoice_number": "INV-GP-2026-007",
+      "po_id": "p0000000-0000-0000-0000-000000000004",
+      "vendor_id": "v0000000-0000-0000-0000-000000000003",
+      "status": "pending",
+      "invoice_date": "2026-06-06",
+      "due_date": "2026-08-05",
+      "subtotal": 320000.00,
+      "tax_amount": 57600.00,
+      "total_amount": 377600.00,
+      "currency": "INR",
+      "submitted_by": "a0000000-0000-0000-0000-000000000012",
+      "approved_by": null,
+      "approved_at": null,
+      "paid_at": null
+    }
+  ],
+  "notifications": [
+    {
+      "id": "n0000000-0000-0000-0000-000000000001",
+      "user_id": "a0000000-0000-0000-0000-000000000003",
+      "type": "approval_required",
+      "title": "PO Approval Required",
+      "message": "Purchase Order PO-2026-0004 for Rs.3,20,000 from Global Parts requires your approval.",
+      "entity_type": "purchase_order",
+      "entity_id": "p0000000-0000-0000-0000-000000000004",
+      "is_read": false,
+      "action_url": "/approvals"
+    },
+    {
+      "id": "n0000000-0000-0000-0000-000000000002",
+      "user_id": "a0000000-0000-0000-0000-000000000003",
+      "type": "approval_required",
+      "title": "New Invoice Pending",
+      "message": "Invoice INV-GP-2026-007 for Rs.3,77,600 received from Global Parts Manufacturing.",
+      "entity_type": "invoice",
+      "entity_id": "i0000000-0000-0000-0000-000000000003",
+      "is_read": false,
+      "action_url": "/invoices"
+    },
+    {
+      "id": "n0000000-0000-0000-0000-000000000003",
+      "user_id": "a0000000-0000-0000-0000-000000000002",
+      "type": "quotation_received",
+      "title": "New Quotation Received",
+      "message": "OfficeWorld Solutions submitted a quotation for RFQ-2026-0002 (Annual Office Supplies).",
+      "entity_type": "quotation",
+      "entity_id": "q0000000-0000-0000-0000-000000000004",
+      "is_read": false,
+      "action_url": "/rfqs/r0000000-0000-0000-0000-000000000002"
+    },
+    {
+      "id": "n0000000-0000-0000-0000-000000000004",
+      "user_id": "a0000000-0000-0000-0000-000000000002",
+      "type": "po_acknowledged",
+      "title": "PO Acknowledged by Vendor",
+      "message": "TechSupply India acknowledged PO-2026-0001. Expected delivery by target date.",
+      "entity_type": "purchase_order",
+      "entity_id": "p0000000-0000-0000-0000-000000000001",
+      "is_read": true,
+      "action_url": "/purchase-orders/p0000000-0000-0000-0000-000000000001"
+    },
+    {
+      "id": "n0000000-0000-0000-0000-000000000005",
+      "user_id": "a0000000-0000-0000-0000-000000000010",
+      "type": "rfq_received",
+      "title": "New RFQ Invitation",
+      "message": "You have been invited to submit a quotation for RFQ-2026-0002 (Annual Office Supplies).",
+      "entity_type": "rfq",
+      "entity_id": "r0000000-0000-0000-0000-000000000002",
+      "is_read": false,
+      "action_url": "/vendor/rfqs/r0000000-0000-0000-0000-000000000002"
+    }
+  ],
+  "activity_logs": [
+    {
+      "id": "al000000-0000-0000-0000-000000000001",
+      "entity_type": "rfq",
+      "entity_id": "r0000000-0000-0000-0000-000000000001",
+      "action": "created",
+      "description": "RFQ created: Q3 Laptop Procurement",
+      "performed_by": "a0000000-0000-0000-0000-000000000002",
+      "metadata": {
+        "rfq_number": "RFQ-2026-0001"
+      }
+    },
+    {
+      "id": "al000000-0000-0000-0000-000000000002",
+      "entity_type": "rfq",
+      "entity_id": "r0000000-0000-0000-0000-000000000001",
+      "action": "sent",
+      "description": "RFQ sent to 3 vendors: TechSupply, OfficeWorld, GlobalParts",
+      "performed_by": "a0000000-0000-0000-0000-000000000002",
+      "metadata": {
+        "vendor_count": 3
+      }
+    },
+    {
+      "id": "al000000-0000-0000-0000-000000000003",
+      "entity_type": "rfq",
+      "entity_id": "r0000000-0000-0000-0000-000000000001",
+      "action": "quotation_received",
+      "description": "Quotation received from TechSupply India -- Rs.17,25,000",
+      "performed_by": "a0000000-0000-0000-0000-000000000010",
+      "metadata": {
+        "vendor": "TechSupply India",
+        "amount": 1725000
+      }
+    },
+    {
+      "id": "al000000-0000-0000-0000-000000000004",
+      "entity_type": "rfq",
+      "entity_id": "r0000000-0000-0000-0000-000000000001",
+      "action": "quotation_received",
+      "description": "Quotation received from OfficeWorld -- Rs.16,50,000",
+      "performed_by": "a0000000-0000-0000-0000-000000000011",
+      "metadata": {
+        "vendor": "OfficeWorld",
+        "amount": 1650000
+      }
+    },
+    {
+      "id": "al000000-0000-0000-0000-000000000005",
+      "entity_type": "rfq",
+      "entity_id": "r0000000-0000-0000-0000-000000000001",
+      "action": "quotation_received",
+      "description": "Quotation received from GlobalParts -- Rs.18,90,000",
+      "performed_by": "a0000000-0000-0000-0000-000000000012",
+      "metadata": {
+        "vendor": "GlobalParts",
+        "amount": 1890000
+      }
+    },
+    {
+      "id": "al000000-0000-0000-0000-000000000006",
+      "entity_type": "rfq",
+      "entity_id": "r0000000-0000-0000-0000-000000000001",
+      "action": "closed",
+      "description": "RFQ closed for evaluation. 3 quotations received.",
+      "performed_by": "a0000000-0000-0000-0000-000000000002",
+      "metadata": {
+        "quotation_count": 3
+      }
+    },
+    {
+      "id": "al000000-0000-0000-0000-000000000007",
+      "entity_type": "rfq",
+      "entity_id": "r0000000-0000-0000-0000-000000000001",
+      "action": "awarded",
+      "description": "Vendor selected: TechSupply India. Best value: competitive price + 14-day delivery.",
+      "performed_by": "a0000000-0000-0000-0000-000000000002",
+      "metadata": {
+        "selected_vendor": "TechSupply India",
+        "amount": 1725000
+      }
+    },
+    {
+      "id": "al000000-0000-0000-0000-000000000008",
+      "entity_type": "purchase_order",
+      "entity_id": "p0000000-0000-0000-0000-000000000001",
+      "action": "created",
+      "description": "Purchase Order PO-2026-0001 generated from RFQ-2026-0001",
+      "performed_by": "a0000000-0000-0000-0000-000000000002",
+      "metadata": {
+        "po_number": "PO-2026-0001",
+        "amount": 1725000
+      }
+    },
+    {
+      "id": "al000000-0000-0000-0000-000000000009",
+      "entity_type": "purchase_order",
+      "entity_id": "p0000000-0000-0000-0000-000000000001",
+      "action": "submitted_for_approval",
+      "description": "PO submitted for manager approval",
+      "performed_by": "a0000000-0000-0000-0000-000000000002",
+      "metadata": {}
+    },
+    {
+      "id": "al000000-0000-0000-0000-000000000010",
+      "entity_type": "purchase_order",
+      "entity_id": "p0000000-0000-0000-0000-000000000001",
+      "action": "approved",
+      "description": "PO approved by Anand Mehta -- Within Q3 IT budget",
+      "performed_by": "a0000000-0000-0000-0000-000000000003",
+      "metadata": {
+        "approver": "Anand Mehta"
+      }
+    },
+    {
+      "id": "al000000-0000-0000-0000-000000000011",
+      "entity_type": "purchase_order",
+      "entity_id": "p0000000-0000-0000-0000-000000000001",
+      "action": "sent",
+      "description": "PO sent to TechSupply India",
+      "performed_by": "a0000000-0000-0000-0000-000000000002",
+      "metadata": {}
+    },
+    {
+      "id": "al000000-0000-0000-0000-000000000012",
+      "entity_type": "purchase_order",
+      "entity_id": "p0000000-0000-0000-0000-000000000001",
+      "action": "acknowledged",
+      "description": "Vendor acknowledged receipt of PO",
+      "performed_by": "a0000000-0000-0000-0000-000000000010",
+      "metadata": {}
+    }
+  ]
+}
