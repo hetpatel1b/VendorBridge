@@ -143,6 +143,7 @@
       "id": "934132b2-2b63-4218-a2bf-2c7db6f9630e",
       "created_at": "2026-06-06T08:37:47.721Z",
       "email": "test12345@gmail.com",
+      "password": "hetprashant",
       "password_hash": "managed_by_supabase_auth",
       "first_name": "Test",
       "last_name": "User",

@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "npx concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix FRONTEND\"",
-    "install-all": "npm install --prefix backend && npm install --prefix FRONTEND"
+    "install-all": "npm install --prefix backend && npm install --prefix FRONTEND",
+    "build": "npm run build --prefix FRONTEND",
+    "start": "npx concurrently \"npm start --prefix backend\" \"npm start --prefix FRONTEND\""
   }
 }

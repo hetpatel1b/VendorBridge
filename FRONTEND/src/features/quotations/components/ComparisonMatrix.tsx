@@ -1,13 +1,17 @@
 "use client";
 
 import { useEffect, useState, useMemo } from "react";
+import { useParams, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, AlertCircle, ShieldCheck, Zap, SlidersHorizontal } from "lucide-react";
+import { Check, AlertCircle, ShieldCheck, Zap, SlidersHorizontal, ArrowLeft, Loader2, Table2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
-import { supabase } from "@/lib/supabaseClient";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { toast } from "sonner";
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
 interface VendorData {
   id: string;
@@ -18,38 +22,97 @@ interface VendorData {
   riskLevel: "Low" | "Medium" | "High";
   compliance: string[];
   calculatedScore?: number;
+  quotation_id: string;
 }
 
 export function ComparisonMatrix() {
+  const { rfqId } = useParams();
+  const router = useRouter();
   const [vendorsData, setVendorsData] = useState<VendorData[]>([]);
+  const [matrixData, setMatrixData] = useState<any[]>([]);
+  const [rfqHeader, setRfqHeader] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState<string | null>(null);
   const [weights, setWeights] = useState({ price: 50, speed: 30, risk: 20 });
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        // Fetch vendors to compare
-        const { data, error } = await supabase.from("vendors").select("*");
-        if (data) {
-          const mapped = data.map((v: any) => ({
-            id: v.id || v.name,
-            name: v.name,
-            baseScore: v.score || 85,
-            price: v.price || Math.floor(Math.random() * 20000) + 30000, // Fallback if no quotation relation yet
-            deliveryDays: v.delivery_days || Math.floor(Math.random() * 14) + 7,
-            riskLevel: v.risk || "Medium",
-            compliance: v.certs || []
-          }));
-          setVendorsData(mapped);
-        }
-      } catch (err) {
-        console.error("Failed to fetch matrix data:", err);
-      } finally {
-        setLoading(false);
-      }
+  const getAccessToken = () => {
+    if (typeof window === 'undefined') return '';
+    const sessionStr = localStorage.getItem('mock_supabase_session');
+    if (!sessionStr) return '';
+    try {
+      const session = JSON.parse(sessionStr);
+      return session?.access_token || '';
+    } catch {
+      return '';
     }
-    fetchData();
-  }, []);
+  };
+
+  async function fetchComparisonData() {
+    setLoading(true);
+    try {
+      const token = getAccessToken();
+      const res = await fetch(`${API_URL}/api/v1/quotations/compare/${rfqId}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      const json = await res.json();
+      if (json.success && json.data) {
+        setRfqHeader(json.data.rfq);
+        setMatrixData(json.data.matrix || []);
+        
+        const mapped = (json.data.vendors || []).map((v: any) => ({
+          id: v.vendor_id,
+          name: v.company_name,
+          baseScore: v.rating_avg ? v.rating_avg * 20 : 80, // scale 5.0 to 100
+          price: v.total_amount || 0,
+          deliveryDays: v.delivery_days || 7,
+          riskLevel: v.rating_avg >= 4.2 ? "Low" : v.rating_avg >= 3.5 ? "Medium" : "High",
+          compliance: v.rating_avg >= 4.0 ? ["ISO 9001", "SOC2"] : ["ISO 9001"],
+          quotation_id: v.quotation_id
+        }));
+        setVendorsData(mapped);
+      } else {
+        toast.error(json.error || "Failed to fetch comparison details");
+      }
+    } catch (err: any) {
+      console.error("Failed to fetch comparison matrix:", err);
+      toast.error("Network error while loading comparison matrix");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    if (rfqId) {
+      fetchComparisonData();
+    }
+  }, [rfqId]);
+
+  const handleSelectVendor = async (quotationId: string) => {
+    setSubmitting(quotationId);
+    try {
+      const token = getAccessToken();
+      const res = await fetch(`${API_URL}/api/v1/quotations/${quotationId}/select`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      const data = await res.json();
+      if (data.success) {
+        toast.success("Contract successfully awarded! Purchase Order generated.");
+        router.push("/purchase-orders");
+      } else {
+        toast.error(data.error || "Selection failed");
+      }
+    } catch (err: any) {
+      toast.error(err.message || "An error occurred");
+    } finally {
+      setSubmitting(null);
+    }
+  };
 
   // Normalize prices and speeds for scoring calculation
   const maxPrice = Math.max(...vendorsData.map(v => v.price), 1);
@@ -58,7 +121,7 @@ export function ComparisonMatrix() {
   const sortedVendors = useMemo(() => {
     return vendorsData.map(vendor => {
       // Calculate normalized scores (100 is best)
-      const priceScore = ((maxPrice - vendor.price) / maxPrice) * 100 + 50; // simple normalization
+      const priceScore = ((maxPrice - vendor.price) / maxPrice) * 100 + 50; 
       const speedScore = ((maxDays - vendor.deliveryDays) / maxDays) * 100 + 50;
       const riskScore = vendor.riskLevel === 'Low' ? 100 : vendor.riskLevel === 'Medium' ? 70 : 40;
 
@@ -75,13 +138,56 @@ export function ComparisonMatrix() {
         calculatedScore: Math.round(finalScore)
       };
     }).sort((a, b) => b.calculatedScore - a.calculatedScore);
-  }, [weights, maxPrice, maxDays]);
+  }, [weights, vendorsData, maxPrice, maxDays]);
 
   const lowestPrice = Math.min(...vendorsData.map((v) => v.price), Infinity);
   const fastestDelivery = Math.min(...vendorsData.map((v) => v.deliveryDays), Infinity);
 
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center justify-center py-24 text-muted-foreground gap-4">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+        <span>Loading comparison details...</span>
+      </div>
+    );
+  }
+
+  if (vendorsData.length === 0) {
+    return (
+      <Card className="p-12 text-center glass-panel max-w-lg mx-auto">
+        <AlertCircle className="w-12 h-12 mx-auto text-muted-foreground mb-4" />
+        <h3 className="text-xl font-bold mb-2">No Quotations Yet</h3>
+        <p className="text-muted-foreground text-sm mb-6">
+          No vendors have submitted bids for this RFQ yet. Send invitations or check back later.
+        </p>
+        <Button onClick={() => router.push("/rfqs")} variant="outline" className="gap-2">
+          <ArrowLeft className="w-4 h-4" /> Back to RFQs
+        </Button>
+      </Card>
+    );
+  }
+
   return (
     <div className="space-y-8">
+      {/* RFQ Header Info */}
+      {rfqHeader && (
+        <Card className="p-6 border-border/50 glass-card bg-muted/10">
+          <div className="flex justify-between items-start flex-wrap gap-4">
+            <div>
+              <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest bg-muted/60 px-2 py-0.5 rounded">
+                {rfqHeader.rfq_number}
+              </span>
+              <h2 className="text-2xl font-bold tracking-tight mt-2">{rfqHeader.title}</h2>
+              <p className="text-muted-foreground text-sm mt-1">{rfqHeader.description}</p>
+            </div>
+            <div className="text-right">
+              <span className="text-xs text-muted-foreground uppercase tracking-wider block">Estimated Budget</span>
+              <span className="text-2xl font-bold font-mono text-primary">${rfqHeader.budget_estimate?.toLocaleString()}</span>
+            </div>
+          </div>
+        </Card>
+      )}
+
       {/* Interactive Weighting Engine */}
       <Card className="p-6 glass-panel border-primary/20 bg-background/80 backdrop-blur-2xl">
         <div className="flex items-center gap-2 mb-6 text-primary">
@@ -125,7 +231,7 @@ export function ComparisonMatrix() {
         </div>
       </Card>
 
-      {/* Dynamic Matrix */}
+      {/* Dynamic Match Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
         <AnimatePresence>
           {sortedVendors.map((vendor, index) => {
@@ -156,7 +262,7 @@ export function ComparisonMatrix() {
                   )}
                   
                   <div className="mb-6 mt-2">
-                    <h3 className="text-xl font-semibold tracking-tight leading-tight">{vendor.name}</h3>
+                    <h3 className="text-xl font-semibold tracking-tight leading-tight line-clamp-1" title={vendor.name}>{vendor.name}</h3>
                     <div className="flex items-center gap-2 mt-3">
                       <Badge variant={vendor.calculatedScore >= 80 ? "default" : "secondary"} className={vendor.calculatedScore >= 80 ? "bg-primary/20 text-primary hover:bg-primary/30" : ""}>
                         {vendor.calculatedScore} Match Score
@@ -216,8 +322,17 @@ export function ComparisonMatrix() {
                     <Button 
                       className="w-full shadow-sm transition-all h-11 font-medium" 
                       variant={isRecommended ? "default" : "outline"}
+                      onClick={() => handleSelectVendor(vendor.quotation_id)}
+                      disabled={submitting !== null}
                     >
-                      {isRecommended ? "Award Contract" : "Select Vendor"}
+                      {submitting === vendor.quotation_id ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                          Awarding...
+                        </>
+                      ) : (
+                        isRecommended ? "Award Contract" : "Select Vendor"
+                      )}
                     </Button>
                   </div>
                 </Card>
@@ -226,6 +341,61 @@ export function ComparisonMatrix() {
           })}
         </AnimatePresence>
       </div>
+
+      {/* Itemized Comparison Matrix Table */}
+      <Card className="p-6 border-border/50 glass-card">
+        <div className="flex items-center gap-2 mb-6">
+          <Table2 className="w-5 h-5 text-primary" />
+          <h3 className="font-semibold text-lg tracking-tight">Item-by-Item Price Comparison Grid</h3>
+        </div>
+        <div className="overflow-x-auto">
+          <Table>
+            <TableHeader className="bg-muted/30">
+              <TableRow className="border-border/50 hover:bg-transparent">
+                <TableHead className="min-w-[200px]">RFQ Item Name</TableHead>
+                <TableHead className="text-right">Qty</TableHead>
+                <TableHead className="text-right">Est. Unit Price</TableHead>
+                {vendorsData.map(v => (
+                  <TableHead key={v.id} className="text-right font-medium text-foreground">
+                    {v.name}
+                  </TableHead>
+                ))}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {matrixData.map((row) => (
+                <TableRow key={row.rfq_item_id} className="border-border/50 hover:bg-muted/10">
+                  <TableCell className="font-medium text-foreground">{row.item_name}</TableCell>
+                  <TableCell className="text-right">{row.quantity} {row.unit}</TableCell>
+                  <TableCell className="text-right text-muted-foreground font-mono">
+                    ${Number(row.estimated_unit_price).toLocaleString()}
+                  </TableCell>
+                  {vendorsData.map(v => {
+                    const quote = row.quotes.find((q: any) => q.vendor_id === v.id);
+                    const isLowest = quote?.price_rank === 1;
+                    return (
+                      <TableCell key={v.id} className="text-right font-mono">
+                        {quote && quote.unit_price !== null ? (
+                          <div className="flex flex-col items-end">
+                            <span className={isLowest ? "text-green-500 font-semibold" : "text-foreground"}>
+                              ${Number(quote.unit_price).toLocaleString()}
+                            </span>
+                            <span className="text-[10px] text-muted-foreground">
+                              Total: ${Number(quote.total_price).toLocaleString()}
+                            </span>
+                          </div>
+                        ) : (
+                          <span className="text-muted-foreground/40">—</span>
+                        )}
+                      </TableCell>
+                    );
+                  })}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </Card>
     </div>
   );
 }

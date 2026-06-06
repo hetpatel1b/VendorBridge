@@ -203,14 +203,16 @@ class MockMutationBuilder {
 class MockSupabaseClient {
     auth = {
         signUp: async ({ email, password }) => {
-            try {
-                const { data, error } = await realSupabase.auth.signUp({ email, password });
-                if (!error && data && data.user) {
-                    return { data, error: null };
+            if (process.env.USE_REAL_SUPABASE === 'true') {
+                try {
+                    const { data, error } = await realSupabase.auth.signUp({ email, password });
+                    if (!error && data && data.user) {
+                        return { data, error: null };
+                    }
+                    console.warn("Real Supabase signup failed, trying local DB fallback. Error:", error?.message);
+                } catch (err) {
+                    console.warn("Real Supabase signup failed with exception, trying local DB fallback:", err.message);
                 }
-                console.warn("Real Supabase signup failed, trying local DB fallback. Error:", error?.message);
-            } catch (err) {
-                console.warn("Real Supabase signup failed with exception, trying local DB fallback:", err.message);
             }
 
             const db = readDb();
@@ -245,28 +247,30 @@ class MockSupabaseClient {
         },
 
         signInWithPassword: async ({ email, password }) => {
-            try {
-                const { data, error } = await realSupabase.auth.signInWithPassword({ email, password });
-                if (!error && data && data.session) {
-                    const currentDb = readDb();
-                    const existingProfile = currentDb.users.find(u => u.id === data.user.id);
-                    if (!existingProfile) {
-                        currentDb.users.push({
-                            id: data.user.id,
-                            email: data.user.email,
-                            first_name: 'Supabase',
-                            last_name: 'User',
-                            role: 'vendor',
-                            is_active: true,
-                            created_at: new Date().toISOString()
-                        });
-                        writeDb(currentDb);
+            if (process.env.USE_REAL_SUPABASE === 'true') {
+                try {
+                    const { data, error } = await realSupabase.auth.signInWithPassword({ email, password });
+                    if (!error && data && data.session) {
+                        const currentDb = readDb();
+                        const existingProfile = currentDb.users.find(u => u.id === data.user.id);
+                        if (!existingProfile) {
+                            currentDb.users.push({
+                                id: data.user.id,
+                                email: data.user.email,
+                                first_name: 'Supabase',
+                                last_name: 'User',
+                                role: 'vendor',
+                                is_active: true,
+                                created_at: new Date().toISOString()
+                            });
+                            writeDb(currentDb);
+                        }
+                        return { data, error: null };
                     }
-                    return { data, error: null };
+                    console.warn("Real Supabase login failed, trying local DB fallback. Error:", error?.message);
+                } catch (err) {
+                    console.warn("Real Supabase login failed with exception:", err.message);
                 }
-                console.warn("Real Supabase login failed, trying local DB fallback. Error:", error?.message);
-            } catch (err) {
-                console.warn("Real Supabase login failed with exception:", err.message);
             }
 
             const db = readDb();
@@ -317,15 +321,19 @@ class MockSupabaseClient {
                 }
             }
 
-            try {
-                const { data, error } = await realSupabase.auth.getUser(token);
-                if (!error && data && data.user) {
-                    return { data, error: null };
+            if (process.env.USE_REAL_SUPABASE === 'true') {
+                try {
+                    const { data, error } = await realSupabase.auth.getUser(token);
+                    if (!error && data && data.user) {
+                        return { data, error: null };
+                    }
+                    return { data: { user: null }, error };
+                } catch (err) {
+                    return { data: { user: null }, error: { message: err.message } };
                 }
-                return { data: { user: null }, error };
-            } catch (err) {
-                return { data: { user: null }, error: { message: err.message } };
             }
+
+            return { data: { user: null }, error: { message: 'Invalid or expired token (local mode)' } };
         }
     };
 

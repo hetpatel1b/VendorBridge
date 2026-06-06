@@ -32,11 +32,47 @@ export function PoList() {
   useEffect(() => {
     async function fetchPos() {
       try {
-        const { data, error } = await supabase.from("purchase_orders").select("*");
-        if (error) {
-          console.error("Error fetching purchase orders:", error.message);
-        } else if (data) {
-          setPos(data);
+        const { data: poData, error: poError } = await supabase.from("purchase_orders").select("*");
+        const { data: vendorData } = await supabase.from("vendors").select("*");
+        const { data: poItemsData } = await supabase.from("po_items").select("*");
+
+        if (poError) {
+          console.error("Error fetching purchase orders:", poError.message);
+        } else if (poData) {
+          const vendorsMap = Array.isArray(vendorData)
+            ? new Map(vendorData.map(v => [v.id, v.company_name]))
+            : new Map();
+
+          const itemsCountMap = new Map<string, number>();
+          if (Array.isArray(poItemsData)) {
+            poItemsData.forEach(item => {
+              const current = itemsCountMap.get(item.po_id) || 0;
+              itemsCountMap.set(item.po_id, current + 1);
+            });
+          }
+
+          const stageMap: Record<string, number> = {
+            draft: 1,
+            sent: 1,
+            acknowledged: 2,
+            shipped: 3,
+            delivered: 4,
+            received: 4,
+            invoiced: 5,
+            closed: 5
+          };
+
+          const mapped = poData.map((po: any) => ({
+            id: po.po_number || po.id,
+            rawId: po.id,
+            status: po.status || "draft",
+            currentStage: stageMap[po.status?.toLowerCase()] || 1,
+            vendor: vendorsMap.get(po.vendor_id) || "Unknown Vendor",
+            date: po.created_at ? new Date(po.created_at) : new Date(),
+            items: itemsCountMap.get(po.id) || 1,
+            amount: po.grand_total || po.total_amount || 0
+          }));
+          setPos(mapped);
         }
       } catch (err) {
         console.error("Failed to fetch purchase orders:", err);

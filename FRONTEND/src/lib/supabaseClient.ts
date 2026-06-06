@@ -1,5 +1,7 @@
 // Mock Supabase Client that redirects queries and auth to local Express backend
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+
 class MockQueryBuilder {
   private table: string;
   private filters: any[] = [];
@@ -47,7 +49,7 @@ class MockQueryBuilder {
 
   async then(onfulfilled: (res: any) => void) {
     try {
-      const res = await fetch('http://localhost:5000/api/v1/db', {
+      const res = await fetch(`${API_URL}/api/v1/db`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -72,7 +74,7 @@ class MockQueryBuilder {
   insert(data: any) {
     const execute = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/v1/db', {
+        const res = await fetch(`${API_URL}/api/v1/db`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -140,7 +142,7 @@ class MockMutationBuilder {
 
   async then(onfulfilled: (res: any) => void) {
     try {
-      const res = await fetch('http://localhost:5000/api/v1/db', {
+      const res = await fetch(`${API_URL}/api/v1/db`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -180,7 +182,7 @@ class MockSupabaseClient {
   auth = {
     signUp: async ({ email, password, first_name, last_name, role }: any) => {
       try {
-        const res = await fetch('http://localhost:5000/api/v1/auth/register', {
+        const res = await fetch(`${API_URL}/api/v1/auth/register`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ 
@@ -203,7 +205,7 @@ class MockSupabaseClient {
 
     signInWithPassword: async ({ email, password }: any) => {
       try {
-        const res = await fetch('http://localhost:5000/api/v1/auth/login', {
+        const res = await fetch(`${API_URL}/api/v1/auth/login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, password })
