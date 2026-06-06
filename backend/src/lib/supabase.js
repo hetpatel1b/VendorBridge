@@ -2,6 +2,15 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import crypto from 'crypto';
+import { createClient } from '@supabase/supabase-js';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
+
+const realSupabase = createClient(supabaseUrl, supabaseAnonKey);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -192,91 +201,7 @@ class MockMutationBuilder {
 }
 
 class MockSupabaseClient {
-    auth = {
-        signUp: async ({ email, password }) => {
-            const db = readDb();
-            const existing = db.users.find(u => u.email === email);
-            if (existing) {
-                return { data: { user: null }, error: { message: 'User already exists' } };
-            }
-
-            const newUser = {
-                id: crypto.randomUUID(),
-                email,
-                password,
-                first_name: '',
-                last_name: '',
-                role: 'vendor',
-                is_active: true,
-                created_at: new Date().toISOString()
-            };
-
-            db.users.push(newUser);
-            writeDb(db);
-
-            return {
-                data: {
-                    user: {
-                        id: newUser.id,
-                        email: newUser.email
-                    }
-                },
-                error: null
-            };
-        },
-
-        signInWithPassword: async ({ email, password }) => {
-            const db = readDb();
-            const user = db.users.find(u => u.email === email && u.password === password);
-            if (!user) {
-                return { data: { session: null }, error: { message: 'Invalid credentials' } };
-            }
-
-            const mockToken = Buffer.from(JSON.stringify({ id: user.id, email: user.email })).toString('base64');
-
-            return {
-                data: {
-                    user: {
-                        id: user.id,
-                        email: user.email
-                    },
-                    session: {
-                        access_token: `mock_jwt_${mockToken}`
-                    }
-                },
-                error: null
-            };
-        },
-
-        getUser: async (token) => {
-            if (!token || !token.startsWith('mock_jwt_')) {
-                return { data: { user: null }, error: { message: 'Invalid token' } };
-            }
-
-            try {
-                const base64 = token.replace('mock_jwt_', '');
-                const userPayload = JSON.parse(Buffer.from(base64, 'base64').toString('utf8'));
-                const db = readDb();
-                const user = db.users.find(u => u.id === userPayload.id);
-
-                if (!user) {
-                    return { data: { user: null }, error: { message: 'User not found' } };
-                }
-
-                return {
-                    data: {
-                        user: {
-                            id: user.id,
-                            email: user.email
-                        }
-                    },
-                    error: null
-                };
-            } catch (err) {
-                return { data: { user: null }, error: { message: 'Failed to decode token' } };
-            }
-        }
-    };
+    auth = realSupabase.auth;
 
     from(table) {
         const db = readDb();

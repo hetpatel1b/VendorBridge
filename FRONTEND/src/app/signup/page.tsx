@@ -14,6 +14,9 @@ import { useRouter } from "next/navigation";
 export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [role, setRole] = useState("vendor");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -25,6 +28,9 @@ export default function SignupPage() {
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
+        first_name: firstName,
+        last_name: lastName,
+        role,
       });
 
       if (error) {
@@ -60,6 +66,33 @@ export default function SignupPage() {
           </p>
 
           <form className="space-y-4" onSubmit={handleSignup}>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="firstName">First Name</Label>
+                <Input 
+                  id="firstName" 
+                  type="text" 
+                  placeholder="John" 
+                  className="bg-background/50 h-11"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="lastName">Last Name</Label>
+                <Input 
+                  id="lastName" 
+                  type="text" 
+                  placeholder="Doe" 
+                  className="bg-background/50 h-11"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input 
@@ -85,6 +118,23 @@ export default function SignupPage() {
                 minLength={6}
               />
             </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="role">Account Role</Label>
+              <select
+                id="role"
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                className="flex h-11 w-full rounded-md border border-input bg-background/50 px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                required
+              >
+                <option value="vendor" className="bg-background text-foreground">Vendor / Supplier</option>
+                <option value="procurement_officer" className="bg-background text-foreground">Procurement Officer</option>
+                <option value="manager" className="bg-background text-foreground">Manager / Approver</option>
+                <option value="admin" className="bg-background text-foreground">Administrator</option>
+              </select>
+            </div>
+
             <Button className="w-full h-11 mt-6 font-medium shadow-lg shadow-primary/20" type="submit" disabled={loading}>
               {loading ? "Signing up..." : (
                 <>Sign Up <ArrowRight className="w-4 h-4 ml-2" /></>

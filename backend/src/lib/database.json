@@ -125,6 +125,19 @@
       "password_hash": "managed_by_supabase_auth",
       "phone": null,
       "updated_at": "2026-06-06T08:07:29.255Z"
+    },
+    {
+      "id": "6524847f-8bed-400d-be5f-6dcea101c590",
+      "email": "hetpatel1b1324@gmail.com",
+      "password": "hetprashant",
+      "first_name": "Demo",
+      "last_name": "User",
+      "role": "vendor",
+      "is_active": true,
+      "created_at": "2026-06-06T08:14:04.472Z",
+      "password_hash": "managed_by_supabase_auth",
+      "phone": null,
+      "updated_at": "2026-06-06T08:14:04.475Z"
     }
   ],
   "vendors": [

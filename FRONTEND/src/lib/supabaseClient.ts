@@ -178,12 +178,18 @@ class MockSupabaseClient {
   }
 
   auth = {
-    signUp: async ({ email, password }: any) => {
+    signUp: async ({ email, password, first_name, last_name, role }: any) => {
       try {
         const res = await fetch('http://localhost:5000/api/v1/auth/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password, first_name: 'Demo', last_name: 'User', role: 'vendor' })
+          body: JSON.stringify({ 
+            email, 
+            password, 
+            first_name: first_name || 'Demo', 
+            last_name: last_name || 'User', 
+            role: role || 'vendor' 
+          })
         });
         const data = await res.json();
         if (data.success) {
