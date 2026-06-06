@@ -9,7 +9,7 @@ export default function CompareQuotesPage() {
     <div className="min-h-screen p-6 lg:p-12 animate-in-fade max-w-7xl mx-auto">
       <header className="mb-8 flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon" render={<Link href="/dashboard" />} className="rounded-full">
+          <Button variant="ghost" size="icon" render={<Link href="/dashboard" />} nativeButton={false} className="rounded-full">
               <ArrowLeft className="w-5 h-5" />
           </Button>
           <div>

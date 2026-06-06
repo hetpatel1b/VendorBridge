@@ -81,7 +81,7 @@ export function RfqListTable() {
         <div className="flex items-center gap-2 max-w-sm w-full">
           <Input placeholder="Search RFQs..." className="h-10 glass-panel" />
         </div>
-        <Button render={<Link href="/rfqs/new" />} className="shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-300">
+        <Button render={<Link href="/rfqs/new" />} nativeButton={false} className="shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-300">
             <Plus className="w-4 h-4 mr-2" /> Create RFQ
         </Button>
       </div>
