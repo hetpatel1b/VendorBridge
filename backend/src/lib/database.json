@@ -218,23 +218,6 @@
       "payment_terms": 30,
       "rating_avg": 3.5,
       "total_orders": 8
-    },
-    {
-      "id": "v0000000-0000-0000-0000-000000000005",
-      "user_id": "a0000000-0000-0000-0000-000000000014",
-      "company_name": "FurnPro Interiors",
-      "contact_person": "Sanjay Joshi",
-      "email": "sanjay@furnpro.in",
-      "phone": "+91-9876500014",
-      "city": "Bangalore",
-      "state": "Karnataka",
-      "country": "India",
-      "tax_id": "29AABCF7890J5Z2",
-      "category": "Furniture",
-      "status": "pending",
-      "payment_terms": 30,
-      "rating_avg": 0,
-      "total_orders": 0
     }
   ],
   "vendor_ratings": [
