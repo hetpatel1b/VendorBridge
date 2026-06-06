@@ -102,10 +102,8 @@ export function VendorDirectory() {
                   </div>
                   
                   <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
-                        <MoreVertical className="w-4 h-4" />
-                      </Button>
+                    <DropdownMenuTrigger render={<Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />}>
+                      <MoreVertical className="w-4 h-4" />
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="glass-panel">
                       <DropdownMenuItem onClick={() => handleEdit(vendor)}>Edit Vendor</DropdownMenuItem>

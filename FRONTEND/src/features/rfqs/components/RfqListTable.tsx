@@ -71,10 +71,8 @@ export function RfqListTable() {
         <div className="flex items-center gap-2 max-w-sm w-full">
           <Input placeholder="Search RFQs..." className="h-10 glass-panel" />
         </div>
-        <Button asChild className="shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-300">
-          <Link href="/rfqs/new">
+        <Button render={<Link href="/rfqs/new" />} className="shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-300">
             <Plus className="w-4 h-4 mr-2" /> Create RFQ
-          </Link>
         </Button>
       </div>
 
@@ -121,11 +119,9 @@ export function RfqListTable() {
                   </TableCell>
                   <TableCell>
                     <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <DropdownMenuTrigger render={<Button variant="ghost" className="h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity" />}>
                           <span className="sr-only">Open menu</span>
                           <MoreHorizontal className="h-4 w-4" />
-                        </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end" className="w-[160px] glass-panel">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
@@ -134,10 +130,8 @@ export function RfqListTable() {
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         {rfq.status === "Evaluation" && (
-                          <DropdownMenuItem asChild>
-                            <Link href={`/rfqs/${rfq.id.split('-')[1]}/compare`} className="flex items-center text-primary font-medium focus:text-primary">
+                          <DropdownMenuItem render={<Link href={`/rfqs/${rfq.id.split('-')[1]}/compare`} className="flex items-center text-primary font-medium focus:text-primary" />}>
                               Compare Quotes <ArrowUpRight className="w-4 h-4 ml-auto" />
-                            </Link>
                           </DropdownMenuItem>
                         )}
                         <DropdownMenuItem>View Details</DropdownMenuItem>
